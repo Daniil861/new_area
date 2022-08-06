@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0, user-scalable=0">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<title>Penalty Area</title>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
+
+		@font-face {
+			font-family: 'Inter-bold';
+			src: url("assets/fonts/Inter-Bold.ttf");
+			font-weight: 700;
+		}
+
+		@font-face {
+			font-family: 'Inter-medium';
+			src: url("assets/fonts/Inter-Medium.ttf");
+			font-weight: 500;
+		}
+
+		.button {
+			width: 140px;
+			height: 140px;
+			border-radius: 50%;
+			background: url("assets/sprites/icons/btn-preload.svg") center/contain no-repeat;
+			transition: all 0.3s ease 0s;
+		}
+
+		.button:active {
+			transform: scale(0.97);
+		}
+
+		.button._hold {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+
+		.preloader {
+			position: relative;
+			display: flex;
+			width: 100%;
+			height: 150vh;
+			overflow: hidden;
+			background: url("assets/sprites/other/bg.jpg") center/cover no-repeat;
+		}
+
+		.preloader__button-box {
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			flex: 1;
+		}
+
+		.preloader__block-acces {
+			flex: 0 1 85%;
+		}
+
+		.preloader__button {
+			position: relative;
+			z-index: 3;
+			margin-bottom: 1rem;
+		}
+
+		.preloader._hide {
+			display: none;
+		}
+
+		.acces-preloader {
+			position: relative;
+			z-index: 3;
+			display: flex;
+			flex-direction: column;
+			max-height: 150vh;
+			padding-top: 1.25rem;
+			padding-left: 4.5rem;
+			padding-right: 0.625rem;
+			overflow: auto;
+		}
+
+		@media (min-width: 950px) {
+
+			.acces-preloader {
+				min-height: 125vh;
+			}
+
+			.preloader {
+				height: 125vh;
+			}
+		}
+
+		@media (max-height: 350px) {
+
+			.acces-preloader {
+				min-height: 175vh;
+			}
+
+			.preloader {
+				height: 175vh;
+			}
+		}
+
+		.acces-preloader__title {
+			margin: 0;
+		}
+
+		.text-pre {
+			font-family: 'Inter-bold';
+			font-weight: 700;
+			font-size: 20px;
+			line-height: 1.3;
+			color: #ffffff;
+			text-transform: uppercase;
+		}
+
+		.text-pre:last-child {
+			margin-bottom: 3rem;
+		}
+
+		.font-preload {
+			position: absolute;
+			top: -100px;
+			font-family: 'Inter-medium';
+		}
+	</style>
+</head>
+
+<body>
+	<div id="thegame"></div>
+
+	<script src="script/phaser.js"></script>
+
+	<script src="script/classes/CardScreen.js"></script>
+	<script src="script/classes/ShirtScreen.js"></script>
+	<script src="script/classes/LoadingBar.js"></script>
+	<script src="script/prefabs/Flag.js"></script>
+	<script src="script/scenes/BootScene.js"></script>
+	<script src="script/scenes/PrivacyScene.js"></script>
+	<script src="script/scenes/PreloadScene.js"></script>
+	<script src="script/scenes/StartScene.js"></script>
+	<script src="script/scenes/GameScene.js"></script>
+
+	<script src="script/index.js"></script>
+</body>
+
+</html>
