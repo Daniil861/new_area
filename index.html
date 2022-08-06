@@ -12,6 +12,7 @@
 		body {
 			padding: 0;
 			margin: 0;
+			background-color: #000;
 		}
 
 		@font-face {
@@ -26,120 +27,31 @@
 			font-weight: 500;
 		}
 
-		.button {
-			width: 140px;
-			height: 140px;
-			border-radius: 50%;
-			background: url("assets/sprites/icons/btn-preload.svg") center/contain no-repeat;
-			transition: all 0.3s ease 0s;
-		}
-
-		.button:active {
-			transform: scale(0.97);
-		}
-
-		.button._hold {
-			opacity: 0.5;
-			pointer-events: none;
-		}
-
-		.preloader {
-			position: relative;
-			display: flex;
-			width: 100%;
-			height: 150vh;
-			overflow: hidden;
-			background: url("assets/sprites/other/bg.jpg") center/cover no-repeat;
-		}
-
-		.preloader__button-box {
-			display: flex;
-			justify-content: center;
-			align-items: flex-end;
-			flex: 1;
-		}
-
-		.preloader__block-acces {
-			flex: 0 1 85%;
-		}
-
-		.preloader__button {
-			position: relative;
-			z-index: 3;
-			margin-bottom: 1rem;
-		}
-
-		.preloader._hide {
-			display: none;
-		}
-
-		.acces-preloader {
-			position: relative;
-			z-index: 3;
-			display: flex;
-			flex-direction: column;
-			max-height: 150vh;
-			padding-top: 1.25rem;
-			padding-left: 4.5rem;
-			padding-right: 0.625rem;
-			overflow: auto;
-		}
-
-		@media (min-width: 950px) {
-
-			.acces-preloader {
-				min-height: 125vh;
-			}
-
-			.preloader {
-				height: 125vh;
-			}
-		}
-
-		@media (max-height: 350px) {
-
-			.acces-preloader {
-				min-height: 175vh;
-			}
-
-			.preloader {
-				height: 175vh;
-			}
-		}
-
-		.acces-preloader__title {
-			margin: 0;
-		}
-
-		.text-pre {
-			font-family: 'Inter-bold';
-			font-weight: 700;
-			font-size: 20px;
-			line-height: 1.3;
-			color: #ffffff;
-			text-transform: uppercase;
-		}
-
-		.text-pre:last-child {
-			margin-bottom: 3rem;
-		}
-
-		.font-preload {
+		.font-preload-m {
 			position: absolute;
 			top: -100px;
 			font-family: 'Inter-medium';
+		}
+
+		.font-preload-b {
+			position: absolute;
+			top: -100px;
+			font-family: 'Inter-bold';
 		}
 	</style>
 </head>
 
 <body>
-	<div id="thegame"></div>
+	<div id="thegame">
+		<div class="font-preload-m">.</div>
+		<div class="font-preload-b">.</div>
+	</div>
 
 	<script src="script/phaser.js"></script>
 
+	<script src="script/classes/LoadingBar.js"></script>
 	<script src="script/classes/CardScreen.js"></script>
 	<script src="script/classes/ShirtScreen.js"></script>
-	<script src="script/classes/LoadingBar.js"></script>
 	<script src="script/prefabs/Flag.js"></script>
 	<script src="script/scenes/BootScene.js"></script>
 	<script src="script/scenes/PrivacyScene.js"></script>
