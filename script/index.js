@@ -1,5 +1,4 @@
-window.addEventListener('load', function () {
-	const config = {
+const config = {
 		type: Phaser.AUTO,
 		parent: 'thegame',
 		scale: {
@@ -13,7 +12,7 @@ window.addEventListener('load', function () {
 		},
 		scene: [BootScene, PrivacyScene, PreloadScene, StartScene, GameScene]
 	}
-
+window.addEventListener('load', function () {
 	const game = new Phaser.Game(config);
 	window.focus();
 })
