@@ -3,7 +3,6 @@ class StartScene extends Phaser.Scene {
 		super('Start');
 	}
 	init() {
-		this.detectTheThing();
 		this.counterBtnStart = 0;
 		if (!sessionStorage.getItem('player-team')) {
 			sessionStorage.setItem('player-team', 1);
@@ -36,6 +35,7 @@ class StartScene extends Phaser.Scene {
 	create() {
 		this.createSounds();
 		this.createBg();
+		this.detectTheThing();
 		this.createPlayer();
 		this.createMainButtons();
 		this.createBall();
