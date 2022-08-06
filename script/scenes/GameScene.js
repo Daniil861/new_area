@@ -153,8 +153,12 @@ class GameScene extends Phaser.Scene {
 			this.sounds.loose.play();
 		}
 		setTimeout(() => {
-			this.state = 2;
-			this.startGame2();
+			if (this.state == 1) {
+				this.state = 2;
+				if (this.state == 2) {
+					this.startGame2();
+				}
+			}
 		}, 3000);
 	}
 	checkWinGame2() {
@@ -376,6 +380,8 @@ class GameScene extends Phaser.Scene {
 		this.btnHome.on('pointerdown', this.onBtnHomeClicked, this.btnHome);
 	}
 	onBtnHomeClicked() {
+		this.scene.state = 0;
+		this.scene.removeCircles();
 		this.scene.sounds.touch.play();
 		this.scene.sounds.theme.stop();
 		this.scene.tweens.add({
@@ -943,42 +949,22 @@ class GameScene extends Phaser.Scene {
 			duration: 150,
 		})
 	}
-	showAreasBalls() {
-		this.tweens.add({
-			targets: this.circle1,
-			alpha: 0.5,
-			ease: 'Linear',
-			duration: 150,
-		})
-		this.tweens.add({
-			targets: this.circle2,
-			alpha: 0.5,
-			ease: 'Linear',
-			duration: 150,
-		})
-		this.tweens.add({
-			targets: this.circle3,
-			alpha: 0.5,
-			ease: 'Linear',
-			duration: 150,
-		})
-		this.tweens.add({
-			targets: this.circleBall1,
-			alpha: 0.5,
-			ease: 'Linear',
-			duration: 150,
-		})
-		this.tweens.add({
-			targets: this.circleBall2,
-			alpha: 0.5,
-			ease: 'Linear',
-			duration: 150,
-		})
-		this.tweens.add({
-			targets: this.circleBall3,
-			alpha: 0.5,
-			ease: 'Linear',
-			duration: 150,
-		})
+	removeCircles() {
+		if (this.circleBall1) {
+			delete this.circle1;
+			delete this.circle2;
+			delete this.circle3;
+			delete this.circleBall1;
+			delete this.circleBall2;
+			delete this.circleBall3;
+		}
+		if (this.circleGlove1) {
+			delete this.circle4;
+			delete this.circle5;
+			delete this.circle6;
+			delete this.circleGlove1;
+			delete this.circleGlove2;
+			delete this.circleGlove3;
+		}
 	}
 }
