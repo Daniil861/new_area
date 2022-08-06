@@ -3,7 +3,7 @@ class StartScene extends Phaser.Scene {
 		super('Start');
 	}
 	init() {
-		console.log('Startttttttttttt');
+		this.detectTheThing();
 		this.counterBtnStart = 0;
 		if (!sessionStorage.getItem('player-team')) {
 			sessionStorage.setItem('player-team', 1);
@@ -34,10 +34,8 @@ class StartScene extends Phaser.Scene {
 		}
 	}
 	create() {
-		// this.scene.start('Game');
 		this.createSounds();
 		this.createBg();
-		this.createFullscreen();
 		this.createPlayer();
 		this.createMainButtons();
 		this.createBall();
@@ -46,8 +44,15 @@ class StartScene extends Phaser.Scene {
 		this.createFlags();
 		this.createPlayer2();
 
-		// РџРµСЂРµРґРµР»Р°С‚СЊ - СЃРѕР·РґР°С‚СЊ РєР»Р°СЃСЃ cardScreen РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ Р·Р°РґР°РІР°С‚СЊ РѕР±С‰СѓСЋ Р°РЅРёРјР°С†РёСЋ РїРѕСЏРІР»РµРЅРёСЏ
+		// Переделать - создать класс cardScreen для того чтобы задавать общую анимацию появления
 		this.createCardScreen();
+	}
+
+	detectTheThing() {
+		let uagent = navigator.userAgent.toLowerCase();
+		if (!uagent.search("iphone") || !uagent.search("ipad") || !uagent.search("webos") > -1) {
+			this.createFullscreen();
+		}
 	}
 
 	createCardScreen() {
@@ -66,34 +71,6 @@ class StartScene extends Phaser.Scene {
 
 	createBg() {
 		const background = this.add.sprite(0, 0, 'bg-preload').setOrigin(0);
-
-		// background.setPosition(window.innerWidth / 2, window.innerHeight / 2);
-		// console.log('==============================================');
-		// console.log(`window.innerWidth - ${window.innerWidth}`);
-		// console.log(`window.innerHeight - ${window.innerHeight}`);
-		// console.log(`background.width - ${background.width}`);
-		// console.log(`background.height - ${background.height}`);
-		// console.log('==============================================');
-
-		let scaleX = (window.innerWidth / background.width);
-		let scaleY = (window.innerHeight / background.height);
-		let scale = Math.max(scaleX, scaleY);
-
-		// console.log(`scaleX - ${scaleX}`);
-		// console.log(`scaleY - ${scaleY}`);
-		// console.log(`scale - ${scale}`);
-
-		if (window.innerWidth < 700) {
-			background.setScale(0.8);
-		} else if (window.innerWidth > 700 && window.innerWidth < 800) {
-			background.setScale(1);
-		} else if (window.innerWidth > 800 && window.innerWidth < 900) {
-			background.setScale(1.1);
-		} else if (window.innerWidth > 900 && window.innerWidth < 1000) {
-			background.setScale(1.3);
-		} else if (window.innerWidth > 100) {
-			background.setScale(1.5);
-		}
 	}
 	createFullscreen() {
 		this.fullscreen = this.add.sprite(config.scale.width - 70, 10, 'fullscreen')
@@ -114,26 +91,16 @@ class StartScene extends Phaser.Scene {
 		let widthCard = infoCard.width;
 		let heightCard = infoCard.height;
 
-		let infoShirt = this.textures.get('btn-card').getSourceImage();
-		let widthShirt = infoShirt.width;
-		let heightShirt = infoShirt.height;
+		this.yCard = config.scale.height / 2 - heightCard;
+		this.yShirt = config.scale.height / 2 + heightCard;
 
-		this.yCard = window.innerHeight / 2 + heightCard / 2 - heightCard + 40;
-		this.yShirt = window.innerHeight / 2 + heightShirt / 2 + heightShirt;
-
-		this.card = this.add.sprite(window.innerWidth / 5 + widthCard / 2, this.yCard, 'btn-card')
+		this.card = this.add.sprite(config.scale.width / 5 + widthCard / 2, this.yCard, 'btn-card')
 			.setInteractive();
-		this.shirt = this.add.sprite(window.innerWidth / 5 + widthShirt / 2, this.yShirt, 'btn-shirt')
+		this.shirt = this.add.sprite(config.scale.width / 5 + widthCard / 2, this.yShirt, 'btn-shirt')
 			.setInteractive();
 
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.card.scale = 1.6;
-			this.shirt.scale = 1.6;
-		} else {
-			this.card.scale = 1.3;
-			this.shirt.scale = 1.3;
-		}
+		this.card.scale = 1.6;
+		this.shirt.scale = 1.6;
 
 		this.card.on('pointerdown', function () {
 			this.scene.tweens.add({
@@ -176,16 +143,11 @@ class StartScene extends Phaser.Scene {
 		let info = this.textures.get('player1-1').getSourceImage();
 		let width = info.width;
 
-		this.xPlayer = window.innerWidth / 2 + width / 2;
+		this.xPlayer = config.scale.width / 2 - width / 2;
 		this.yPlayer = 10;
 
 		this.player = this.add.sprite(this.xPlayer, this.yPlayer, `player${player}-1`).setOrigin(0);
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.player.scale = 1.8;
-		} else {
-			this.player.scale = 1.3;
-		}
+		this.player.scale = 1.8;
 	}
 
 	createPlayer2() {
@@ -193,21 +155,11 @@ class StartScene extends Phaser.Scene {
 		let info = this.textures.get('player1-2').getSourceImage();
 
 		this.xPlayer2 = -info.width - 500;
-		this.xPlayer2Active = -info.width * 2 / 3;
-		this.yPlayer2 = config.scale.height / 3;
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xPlayer2Active = -info.width;
-		} else {
-			this.xPlayer2Active = -info.width * 2 / 3;
-		}
+		this.xPlayer2Active = -info.width + 100;
+		this.yPlayer2 = config.scale.height / 3 - 100;
 
 		this.player2 = this.add.sprite(this.xPlayer2, this.yPlayer2, `player${player}-2`).setOrigin(0);
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.player2.scale = 1.8;
-		} else {
-			this.player2.scale = 1.3;
-		}
+		this.player2.scale = 1.8;
 	}
 
 	createBall() {
@@ -218,12 +170,7 @@ class StartScene extends Phaser.Scene {
 		this.xBall = config.scale.width / 2 + (this.widthBall / 2);
 
 		this.ball = this.add.sprite(this.xBall, this.yBall, 'ball').setOrigin(0);
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.ball.scale = 1.8;
-		} else {
-			this.ball.scale = 1.5;
-		}
+		this.ball.scale = 1.8;
 	}
 
 	createStartButton() {
@@ -231,18 +178,14 @@ class StartScene extends Phaser.Scene {
 		this.widthBtnStart = info.width;
 		this.heightBtnStart = info.height;
 
-		this.xBtnStart = (window.innerWidth * config.scaleCoeff) - this.widthBtnStart - 25;
-		this.yBtnStart = (window.innerHeight * config.scaleCoeff / 3) + this.heightBtnStart / 2;
+		this.xBtnStart = config.scale.width - this.widthBtnStart - 25;
+		this.yBtnStart = config.scale.height / 3 + this.heightBtnStart / 2;
 
 		this.btnStart = this.add.sprite(this.xBtnStart, this.yBtnStart, 'btn-start')
 			.setOrigin(0.5)
 			.setInteractive();
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.btnStart.scale = 1.8;
-		} else {
-			this.btnStart.scale = 1.5;
-		}
+		this.btnStart.scale = 1.8;
 
 		this.btnStart.on('pointerdown', this.onBtnStartClicked, this.btnStart);
 	}
@@ -251,21 +194,11 @@ class StartScene extends Phaser.Scene {
 		let info = this.textures.get('btn-home').getSourceImage();
 		this.widthBtnHome = info.width;
 		let height = info.height;
-		this.xBtnHome = -this.widthBtnHome - 50;
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.yBtnHome = 30 + height / 2;
-		} else {
-			this.yBtnHome = 15 + height / 2;
-		}
+		this.xBtnHome = -this.widthBtnHome - 15;
+		this.yBtnHome = 15 + height / 2;
 
 		this.btnHome = this.add.sprite(this.xBtnHome, this.yBtnHome, 'btn-home').setInteractive();
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.btnHome.scale = 1.8;
-		} else {
-			this.btnHome.scale = 1.3;
-		}
+		this.btnHome.scale = 1.3;
 
 		this.btnHome.on('pointerdown', this.onBtnHomeClicked, this.btnHome);
 	}
@@ -292,7 +225,7 @@ class StartScene extends Phaser.Scene {
 		this.flagBox_1.y = -1000;
 		this.flagBox_2.y = 1000;
 
-		// РЎРѕР·РґР°РµРј С„Р»Р°РіРё
+		// Создаем флаги
 		for (let i = 0; i < 2; i++) {
 			for (let j = 1; j < 5; j++) {
 				if (i < 1) {
@@ -425,14 +358,14 @@ class StartScene extends Phaser.Scene {
 		this.scene.tweens.add({
 			targets: this,
 			scale: this.scale - 0.1,
-			ease: 'Linear', // С‚РёРї Р°РЅРёРјР°С†РёРё
-			duration: 150, // РјСЃ - РІСЂРµРјСЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ Р°РЅРёРјР°С†РёРё
+			ease: 'Linear', // тип анимации
+			duration: 150, // мс - время проигрывания анимации
 			onComplete: () => {
 				this.scene.tweens.add({
 					targets: this,
 					scale: this.scale + 0.1,
-					ease: 'Linear', // С‚РёРї Р°РЅРёРјР°С†РёРё
-					duration: 150, // РјСЃ - РІСЂРµРјСЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ Р°РЅРёРјР°С†РёРё
+					ease: 'Linear', // тип анимации
+					duration: 150, // мс - время проигрывания анимации
 				})
 				this.scene.backToMainMenu();
 			}
@@ -464,7 +397,7 @@ class StartScene extends Phaser.Scene {
 
 	backToMainMenu() {
 		this.counterBtnStart = 0;
-		// РЈР±РёСЂР°РµРј РєРЅРѕРїРєСѓ РЅР°Р·Р°Рґ Рё С„Р»Р°РіРё
+		// Убираем кнопку назад и флаги
 		this.scene.scene.tweens.add({
 			targets: this.btnHome,
 			x: this.xBtnHome,
@@ -497,7 +430,7 @@ class StartScene extends Phaser.Scene {
 		})
 		this.removeRect();
 		//=======
-		// РґРѕР±Р°РІР»СЏРµРј СЃС‚Р°СЂС‚РѕРІС‹Рµ СЃРїСЂР°Р№С‚С‹
+		// добавляем стартовые спрайты
 		this.scene.scene.tweens.add({
 			targets: this.ball,
 			y: this.yBall,
@@ -533,7 +466,7 @@ class StartScene extends Phaser.Scene {
 	addBtnHome() {
 		this.scene.scene.tweens.add({
 			targets: this.btnHome,
-			x: this.widthBtnHome + 30,
+			x: this.widthBtnHome + 15,
 			ease: 'Linear',
 			duration: 150,
 			delay: 300
@@ -550,7 +483,7 @@ class StartScene extends Phaser.Scene {
 	}
 
 	startTeamScreen() {
-		// СѓР±РёСЂР°РµРј Р»РёС€РЅРёРµ СЃРїСЂР°Р№С‚С‹
+		// убираем лишние спрайты
 		if (this.counterBtnStart == 0) {
 			this.counterBtnStart = 1;
 			this.removeStartSprites();
@@ -561,7 +494,7 @@ class StartScene extends Phaser.Scene {
 				duration: 150
 			})
 			//====
-			// Р”РѕР±Р°РІР»СЏРµРј РєРЅРѕРїРєСѓ РЅР°Р·Р°Рґ Рё С„Р»Р°РіРё
+			// Добавляем кнопку назад и флаги
 			this.checkSelectedFlags();
 			this.addBtnHome();
 
@@ -595,7 +528,7 @@ class StartScene extends Phaser.Scene {
 		}
 	}
 	removeStartSprites() {
-		// СѓР±РёСЂР°РµРј Р»РёС€РЅРёРµ СЃРїСЂР°Р№С‚С‹
+		// убираем лишние спрайты
 		this.scene.scene.tweens.add({
 			targets: this.card,
 			y: -500,
@@ -656,7 +589,7 @@ class StartScene extends Phaser.Scene {
 		})
 	}
 
-	//РџСЂРѕРІРµСЂСЏРµРј РєР°РєРёРµ РІС‹Р±СЂР°РЅС‹ С„Р»Р°РіРё, РІС‹РґРµР»СЏРµРј СЂР°РјРєРѕР№ РІС‹Р±СЂР°РЅРЅС‹Рµ
+	//Проверяем какие выбраны флаги, выделяем рамкой выбранные
 	checkSelectedFlags() {
 		let flag1 = +sessionStorage.getItem('player-team');
 		let flag2 = +sessionStorage.getItem('enemy-team');

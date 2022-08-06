@@ -6,7 +6,6 @@ class PreloadScene extends Phaser.Scene {
 		this.preloadAssets();
 		this.createBg();
 		const loadingBar = new LoadingBar(this);
-
 	}
 	preloadAssets() {
 		this.load.image('bg-game', 'assets/sprites/other/gameBg.jpg');
@@ -59,37 +58,8 @@ class PreloadScene extends Phaser.Scene {
 	}
 	createBg() {
 		const background = this.add.sprite(0, 0, 'bg-preload').setOrigin(0);
-
-		// background.setPosition(window.innerWidth / 2, window.innerHeight / 2);
-		// console.log('==============================================');
-		// console.log(`window.innerWidth - ${window.innerWidth}`);
-		// console.log(`window.innerHeight - ${window.innerHeight}`);
-		// console.log(`background.width - ${background.width}`);
-		// console.log(`background.height - ${background.height}`);
-		// console.log('==============================================');
-
-		let scaleX = (window.innerWidth / background.width);
-		let scaleY = (window.innerHeight / background.height);
-		let scale = Math.max(scaleX, scaleY);
-
-		// console.log(`scaleX - ${scaleX}`);
-		// console.log(`scaleY - ${scaleY}`);
-		// console.log(`scale - ${scale}`);
-
-		if (window.innerWidth < 700) {
-			background.setScale(0.8);
-		} else if (window.innerWidth > 700 && window.innerWidth < 800) {
-			background.setScale(1);
-		} else if (window.innerWidth > 800 && window.innerWidth < 900) {
-			background.setScale(1.1);
-		} else if (window.innerWidth > 900 && window.innerWidth < 1000) {
-			background.setScale(1.3);
-		} else if (window.innerWidth > 100) {
-			background.setScale(1.5);
-		}
 	}
 	create() {
-		console.log(loadingBar);
-		// this.scene.start('Start');
+		this.scene.start('Start');
 	}
 }

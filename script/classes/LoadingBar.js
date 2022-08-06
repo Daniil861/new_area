@@ -2,14 +2,13 @@ class LoadingBar {
 	constructor(scene) {
 		this.scene = scene;
 		this.style = {
-			boxColor: 0xD3D3D3,
-			barColor: 0xFFF8DC,
-			x: config.width / 2 - 450,
-			y: config.height / 2 + 250,
+			boxColor: 0x8FBC8F,
+			barColor: 0x006400,
+			x: config.scale.width / 2 - 450,
+			y: config.scale.height / 2 + 250,
 			width: 900,
 			height: 25
 		}
-		console.log('loading bar');
 
 		this.progressBox = this.scene.add.graphics();
 		this.progressBar = this.scene.add.graphics();
@@ -19,33 +18,27 @@ class LoadingBar {
 		this.setEvents();
 	}
 	setEvents() {
-		this.scene.load.on('progress', this.showProgressBar, this); // СЃРѕР±С‹С‚РёРµ, РєРѕС‚РѕСЂРѕРµ РѕС‚СЃР»РµР¶РёРІР°РµС‚ РїСЂРѕРіСЂРµСЃСЃ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РіСЂСѓР·РєРё. Р’ С„СѓРЅРєС†РёСЋ РїРµСЂРµРґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РѕС‚ 0 РґРѕ 1
-		this.scene.load.on('fileprogress', this.onFileProgress, this); // СЃРѕР±С‹С‚РёРµ, РєРѕС‚РѕСЂРѕРµ РѕС‚СЃР»РµР¶РёРІР°РµС‚ РєР°РєРѕР№ С„Р°Р№Р» Р·Р°РіСЂСѓР¶Р°РµС‚СЃСЏ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
-		this.scene.load.on('complete', this.onLoadComplete, this); // СЃРѕР±С‹С‚РёРµ, РєРѕС‚РѕСЂРѕРµ РѕС‚СЃР»РµР¶РёРІР°РµС‚ Р·Р°РІРµСЂС€РµРЅРёРµ Р·Р°РіСЂСѓР·РєРё
+		this.scene.load.on('progress', this.showProgressBar, this); // событие, которое отслеживает прогресс выполнения загрузки. В функцию передает значение от 0 до 1
+		this.scene.load.on('complete', this.onLoadComplete, this); // событие, которое отслеживает завершение загрузки
 	}
 
 	showProgressBox() {
-		// С†РµРїРѕС‡РєР° РІС‹Р·РѕРІРѕРІ, С‚Рѕ Р¶Рµ СЃР°РјРѕРµ С‡С‚Рѕ Рё РїСЂРѕРїРёСЃС‹РІР°РЅРёРµ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕС‡РєРµ this.progressBox РІРјРµСЃС‚Рµ СЃРѕ СЃРІРѕР№СЃС‚РІРѕРј
+		// цепочка вызовов, то же самое что и прописывание в каждой строчке this.progressBox вместе со свойством
 		this.progressBox
-			.fillStyle(this.style.boxColor) // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ Р·Р°Р»РёРІРєРё Р±Р»РѕРєР°
+			.fillStyle(this.style.boxColor) // устанавливаем цвет заливки блока
 			.fillRect(this.style.x, this.style.y, this.style.width, this.style.height);
 	}
 
 	showProgressBar(value) {
 		this.progressBar
 			.clear()
-			.fillStyle(this.style.barColor) // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ Р·Р°Р»РёРІРєРё Р±Р»РѕРєР°
+			.fillStyle(this.style.barColor) // устанавливаем цвет заливки блока
 			.fillRect(this.style.x, this.style.y, this.style.width * value, this.style.height);
 	}
 
-	onFileProgress(file) {
-		// РїРѕРєР°Р·С‹РІР°РµС‚ РєР°РєРѕР№ С„Р°Р№Р» Р·Р°РіСЂСѓР¶Р°РµС‚СЃСЏ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
-	}
-
 	onLoadComplete() {
-		// РјРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІС‹Р·С‹РІР°РµС‚СЃСЏ РєРѕРіРґР° Р·Р°РіСЂСѓР·РєР° Р·Р°РІРµСЂС€РµРЅР°
+		// метод, который вызывается когда загрузка завершена
 		this.progressBar.destroy();
 		this.progressBox.destroy();
 	}
-
 }

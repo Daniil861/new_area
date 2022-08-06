@@ -2,95 +2,90 @@ class PrivacyScene extends Phaser.Scene {
 	constructor() {
 		super('Privacy');
 		this.config = {
-			nameGame: 'Penalty Area',
+			nameGame: 'PENALTY AREA',
 			x: 0,
 			y: 0,
 			width: window.innerWidth,
 			height: innerHeight,
 		}
 		this.content = [
-			['Privacy Policy'],
-			['Last Modified 1 March 2021'],
-			['Privacy Policy is updated in accordance with The General Data Protection Regulation (GDPR).'],
+			['PRIVACY POLICY'],
+			['LAST MODIFIED 1 MARCH 2021'],
+			['PRIVACY POLICY IS UPDATED IN ACCORDANCE WITH THE GENERAL DATA PROTECTION REGULATION (GDPR).'],
 			[' '],
-			['1. Introduction',
-				`This is Privacy Policy ${this.config.nameGame}, which explains how is collect, use and share data through mobile applications, our pages or presence on third party websites and other platforms, websites products, offers and Services that we offer from time to time, all of which together we refer as \“Services\” or \“Service\”`
+			['1. INTRODUCTION',
+				`THIS IS PRIVACY POLICY ${this.config.nameGame}, WHICH EXPLAINS HOW IS COLLECT, USE AND SHARE DATA THROUGH MOBILE APPLICATIONS, OUR PAGES OR PRESENCE ON THIRD PARTY WEBSITES AND OTHER PLATFORMS, WEBSITES PRODUCTS, OFFERS AND SERVICES THAT WE OFFER FROM TIME TO TIME, ALL OF WHICH TOGETHER WE REFER AS \�SERVICES\� OR \�SERVICES\�`
 			],
 			[' '],
-			['2. Collect of Personal Data',
-				`${this.config.nameGame} collects and process through the mobile applications the Player's personal data.`,
-				`Personal data means any information from which the player can be directly	or indirectly identified such as a name, location, email address,	communication language, IP address, IDFV (ID for vendor) or Android ID,	advertisement ID, push notifications token, game history, network logs,	cookie online identifier, gender, financial data, etc., (“Personal Data”). Your personal data are processed only to the extent strictly necessary,	depending on the particular purpose of the processing, as defined in point 6.`,
+			['2. COLLECT OF PERSONAL DATA',
+				`${this.config.nameGame} COLLECTS AND PROCESS THROUGH THE MOBILE APPLICATIONS THE PLAYER'S PERSONAL DATA.`,
+				`PERSONAL DATA MEANS ANY INFORMATION FROM WHICH THE PLAYER CAN BE DIRECTLY	OR INDIRECTLY IDENTIFIED SUCH AS A NAME, LOCATION, EMAIL ADDRESS,	COMMUNICATION LANGUAGE, IP ADDRESS, IDFV (ID FOR VENDOR) OR ANDROID ID,	ADVERTISEMENT ID, PUSH NOTIFICATIONS TOKEN, GAME HISTORY, NETWORK LOGS,	COOKIE ONLINE IDENTIFIER, GENDER, FINANCIAL DATA, ETC., (�PERSONAL DATA�). YOUR PERSONAL DATA ARE PROCESSED ONLY TO THE EXTENT STRICTLY NECESSARY,	DEPENDING ON THE PARTICULAR PURPOSE OF THE PROCESSING, AS DEFINED IN POINT 6.`,
 			],
 			[' '],
-			['3. Acceptance and Consent'],
-			[`3.1 Read this Notice carefully before using the ${this.config.nameGame}. By using or registering via the apps, or submitting a query to the Company via the Apps or other means, including telephone or mail, you accept this notice. If you do not accept	this Notice, please don't use the ${this.config.nameGame}.`],
-			[`3.2 By registering for a user account that enables you to use the service, you agree to the terms and conditions of this Privacy Policy, and you consent to the collection, use and disclosure of your information by 	${this.config.nameGame} in accordance with the terms and conditions of this Privacy Policy. If you do not agree to the terms and conditions of this Privacy Policy or If you do not want ${this.config.nameGame} to collect, store, use or share your information in	the ways described in this Privacy Policy, please do not use the service.`],
+			['3. ACCEPTANCE AND CONSENT'],
+			[`3.1 READ THIS NOTICE CAREFULLY BEFORE USING THE ${this.config.nameGame}. BY USING OR REGISTERING VIA THE APPS, OR SUBMITTING A QUERY TO THE COMPANY VIA THE APPS OR OTHER MEANS, INCLUDING TELEPHONE OR MAIL, YOU ACCEPT THIS NOTICE. IF YOU DO NOT ACCEPT	THIS NOTICE, PLEASE DON'T USE THE ${this.config.nameGame}.`],
+			[`3.2 BY REGISTERING FOR A USER ACCOUNT THAT ENABLES YOU TO USE THE SERVICE, YOU AGREE TO THE TERMS AND CONDITIONS OF THIS PRIVACY POLICY, AND YOU CONSENT TO THE COLLECTION, USE AND DISCLOSURE OF YOUR INFORMATION BY ${this.config.nameGame} IN ACCORDANCE WITH THE TERMS AND CONDITIONS OF THIS PRIVACY POLICY. IF YOU DO NOT AGREE TO THE TERMS AND CONDITIONS OF THIS PRIVACY POLICY OR IF YOU DO NOT WANT ${this.config.nameGame} TO COLLECT, STORE, USE OR SHARE YOUR INFORMATION IN	THE WAYS DESCRIBED IN THIS PRIVACY POLICY, PLEASE DO NOT USE THE SERVICE.`],
 			[]
 			[' '],
-			['4. Changes to the Privacy Policy',
-				`${this.config.nameGame} reserves the right to change, modify, add, or remove portions	of this Privacy Policy at any time, for example to reflect updates to the Service or to reflect changes in the law. If we make a material change to the Privacy Policy, we will provide you with appropriate notice and will seek your consent to the updated Privacy Policy in accordance with applicable legal requirements. Please check this Privacy Policy periodically for those changes. Your continued use of the Service after the posting of changes constitutes your binding acceptance of such changes.`
+			['4. CHANGES TO THE PRIVACY POLICY',
+				`${this.config.nameGame} RESERVES THE RIGHT TO CHANGE, MODIFY, ADD, OR REMOVE PORTIONS	OF THIS PRIVACY POLICY AT ANY TIME, FOR EXAMPLE TO REFLECT UPDATES TO THE SERVICE OR TO REFLECT CHANGES IN THE LAW. IF WE MAKE A MATERIAL CHANGE TO THE PRIVACY POLICY, WE WILL PROVIDE YOU WITH APPROPRIATE NOTICE AND WILL SEEK YOUR CONSENT TO THE UPDATED PRIVACY POLICY IN ACCORDANCE WITH APPLICABLE LEGAL REQUIREMENTS. PLEASE CHECK THIS PRIVACY POLICY PERIODICALLY FOR THOSE CHANGES. YOUR CONTINUED USE OF THE SERVICE AFTER THE POSTING OF CHANGES CONSTITUTES YOUR BINDING ACCEPTANCE OF SUCH CHANGES.`
 			],
 			[' '],
-			['5. Information Collection and Use',
-				`Our primary goals in collecting and using information are to provide and improve the Service, to administer and assist you in administering your Account on the Service, and to provide you with a better experience with the service.`,
-				`We process your personal data for the following specified purposes:`,
-				'Provision of Services',
-				'Negotiations on a contractual relationship',
-				'Purposes contained within the data subject\'s consent',
-				'Archiving based on legal regulations',
-				'Direct marketing',
-				'Customer service quality monitoring',
-				'Collect feedback from the market'
+			['5. INFORMATION COLLECTION AND USE',
+				`OUR PRIMARY GOALS IN COLLECTING AND USING INFORMATION ARE TO PROVIDE AND IMPROVE THE SERVICE, TO ADMINISTER AND ASSIST YOU IN ADMINISTERING YOUR ACCOUNT ON THE SERVICE, AND TO PROVIDE YOU WITH A BETTER EXPERIENCE WITH THE SERVICE.`,
+				`WE PROCESS YOUR PERSONAL DATA FOR THE FOLLOWING SPECIFIED PURPOSES:`,
+				'PROVISION OF SERVICES',
+				'NEGOTIATIONS ON A CONTRACTUAL RELATIONSHIP',
+				'PURPOSES CONTAINED WITHIN THE DATA SUBJECT\'S CONSENT',
+				'ARCHIVING BASED ON LEGAL REGULATIONS',
+				'DIRECT MARKETING',
+				'CUSTOMER SERVICE QUALITY MONITORING',
+				'COLLECT FEEDBACK FROM THE MARKET'
 			],
 			[' '],
-			['6. Which Personal Data we collect',
-				`Data you provide to us: Contact information (such as full name and email address), profile information (such as age or gender or photograph), your messages to the Service (such as chat logs and player support tickets), other data you choose to give us.`,
-				`Data we collect automatically: Data about your account and in-game progress, your IP address and mobile device identifiers (such as your device ID, advertising ID), data about your device, such as device manufacturer, model, operating system and language, general location data like country or city name, data about your use of the Service, such as gameplay data and your interactions with other players inside the games.`
+			['6. WHICH PERSONAL DATA WE COLLECT',
+				`DATA YOU PROVIDE TO US: CONTACT INFORMATION (SUCH AS FULL NAME AND EMAIL ADDRESS), PROFILE INFORMATION (SUCH AS AGE OR GENDER OR PHOTOGRAPH), YOUR MESSAGES TO THE SERVICE (SUCH AS CHAT LOGS AND PLAYER SUPPORT TICKETS), OTHER DATA YOU CHOOSE TO GIVE US.`,
+				`DATA WE COLLECT AUTOMATICALLY: DATA ABOUT YOUR ACCOUNT AND IN-GAME PROGRESS, YOUR IP ADDRESS AND MOBILE DEVICE IDENTIFIERS (SUCH AS YOUR DEVICE ID, ADVERTISING ID), DATA ABOUT YOUR DEVICE, SUCH AS DEVICE MANUFACTURER, MODEL, OPERATING SYSTEM AND LANGUAGE, GENERAL LOCATION DATA LIKE COUNTRY OR CITY NAME, DATA ABOUT YOUR USE OF THE SERVICE, SUCH AS GAMEPLAY DATA AND YOUR INTERACTIONS WITH OTHER PLAYERS INSIDE THE GAMES.`
 			],
 			[' '],
-			['7. Information sharing practices',
-				`We do not share any information we collect (including your personal e-mail address) with third parties:`,
-				`unless you authorized us to do so under the terms of this Privacy Policy;`,
-				`or we believe in good faith that the disclosure of the information is required by any applicable law, regulation, court order, legal proceedings or governmental demand;`,
-				`or it is required to handle security breach or fraud investigations, or to enforce the terms of our Terms of Use.`,
-				`Otherwise, we share your information with third parties with whom we have a business relationship, such as analytics providers. The information shared with these third parties may be used for industry analysis, or other purposes related to providing the Services to you.`,
+			['7. INFORMATION SHARING PRACTICES',
+				`WE DO NOT SHARE ANY INFORMATION WE COLLECT (INCLUDING YOUR PERSONAL E-MAIL ADDRESS) WITH THIRD PARTIES:`,
+				`UNLESS YOU AUTHORIZED US TO DO SO UNDER THE TERMS OF THIS PRIVACY POLICY;`,
+				`OR WE BELIEVE IN GOOD FAITH THAT THE DISCLOSURE OF THE INFORMATION IS REQUIRED BY ANY APPLICABLE LAW, REGULATION, COURT ORDER, LEGAL PROCEEDINGS OR GOVERNMENTAL DEMAND;`,
+				`OR IT IS REQUIRED TO HANDLE SECURITY BREACH OR FRAUD INVESTIGATIONS, OR TO ENFORCE THE TERMS OF OUR TERMS OF USE.`,
+				`OTHERWISE, WE SHARE YOUR INFORMATION WITH THIRD PARTIES WITH WHOM WE HAVE A BUSINESS RELATIONSHIP, SUCH AS ANALYTICS PROVIDERS. THE INFORMATION SHARED WITH THESE THIRD PARTIES MAY BE USED FOR INDUSTRY ANALYSIS, OR OTHER PURPOSES RELATED TO PROVIDING THE SERVICES TO YOU.`,
 			],
 			[' '],
-			['8. Cookies',
-				`Like many websites, ${this.config.nameGame}  and service providers acting on our behalf, like Google Analytics, store log files and use tracking technologies such as "cookies" to collect information. A cookie is a small data file that is transferred to your computer’s hard disk or your mobile device for record-keeping purposes. The service may send cookies to a computer or a mobile device when a user accesses or views a service. Information contained in a cookie may be linked to personal information for purposes such as improving the quality of ${this.config.nameGame} Service, tailoring recommendations to interests, and making the Service easier to use.`,
-				`Cookies can be disabled at any time by changing your web browser’s options to stop accepting cookies, to prompt you before accepting a cookie from the websites you visit, or limit the type of cookies you allow. Flash cookies operate differently than browser cookies, and cookie management tools available in a web browser may not remove flash cookies. If you do not accept cookies, however, you may not be able to use all features, portions or functionalities of the Service.`
+			['8. COOKIES',
+				`LIKE MANY WEBSITES, ${this.config.nameGame} AND SERVICE PROVIDERS ACTING ON OUR BEHALF, LIKE GOOGLE ANALYTICS, STORE LOG FILES AND USE TRACKING TECHNOLOGIES SUCH AS "COOKIES" TO COLLECT INFORMATION. A COOKIE IS A SMALL DATA FILE THAT IS TRANSFERRED TO YOUR COMPUTER�S HARD DISK OR YOUR MOBILE DEVICE FOR RECORD-KEEPING PURPOSES. THE SERVICE MAY SEND COOKIES TO A COMPUTER OR A MOBILE DEVICE WHEN A USER ACCESSES OR VIEWS A SERVICE. INFORMATION CONTAINED IN A COOKIE MAY BE LINKED TO PERSONAL INFORMATION FOR PURPOSES SUCH AS IMPROVING THE QUALITY OF ${this.config.nameGame} SERVICE, TAILORING RECOMMENDATIONS TO INTERESTS, AND MAKING THE SERVICE EASIER TO USE.`,
+				`COOKIES CAN BE DISABLED AT ANY TIME BY CHANGING YOUR WEB BROWSER�S OPTIONS TO STOP ACCEPTING COOKIES, TO PROMPT YOU BEFORE ACCEPTING A COOKIE FROM THE WEBSITES YOU VISIT, OR LIMIT THE TYPE OF COOKIES YOU ALLOW. FLASH COOKIES OPERATE DIFFERENTLY THAN BROWSER COOKIES, AND COOKIE MANAGEMENT TOOLS AVAILABLE IN A WEB BROWSER MAY NOT REMOVE FLASH COOKIES. IF YOU DO NOT ACCEPT COOKIES, HOWEVER, YOU MAY NOT BE ABLE TO USE ALL FEATURES, PORTIONS OR FUNCTIONALITIES OF THE SERVICE.`
 			],
 			[' '],
-			['9. Personal data retention period',
-				`We keep your personal data for as long, as you actively use our Services, but no later than the expiration of the statutory accounting and tax laws. After the retention time, your personal information will be completely erased.`
+			['9. PERSONAL DATA RETENTION PERIOD',
+				`WE KEEP YOUR PERSONAL DATA FOR AS LONG, AS YOU ACTIVELY USE OUR SERVICES, BUT NO LATER THAN THE EXPIRATION OF THE STATUTORY ACCOUNTING AND TAX LAWS. AFTER THE RETENTION TIME, YOUR PERSONAL INFORMATION WILL BE COMPLETELY ERASED.`
 			],
 			[' '],
-			['10. Protect the information',
-				`${this.config.nameGame} has made reasonable technical and organizational measures designed to secure your information both online and offline from accidental loss and from unauthorized access, use, alteration or disclosure, and we are committed to the protection of customer information. We will take reasonable steps to ensure that your data is treated securely and in accordance with this Privacy Policy.`,
-				`While we take reasonable precautions against possible security breaches of our Services and our customer databases and records, no website or Internet transmission is completely secure, and ${this.config.nameGame} cannot guarantee that unauthorized access, hacking, data loss, or other breaches will never occur and that third parties will never be able to overcome those measures or use your personal information for improper purposes.`
+			['10. PROTECT THE INFORMATION',
+				`${this.config.nameGame} HAS MADE REASONABLE TECHNICAL AND ORGANIZATIONAL MEASURES DESIGNED TO SECURE YOUR INFORMATION BOTH ONLINE AND OFFLINE FROM ACCIDENTAL LOSS AND FROM UNAUTHORIZED ACCESS, USE, ALTERATION OR DISCLOSURE, AND WE ARE COMMITTED TO THE PROTECTION OF CUSTOMER INFORMATION. WE WILL TAKE REASONABLE STEPS TO ENSURE THAT YOUR DATA IS TREATED SECURELY AND IN ACCORDANCE WITH THIS PRIVACY POLICY.`,
+				`WHILE WE TAKE REASONABLE PRECAUTIONS AGAINST POSSIBLE SECURITY BREACHES OF OUR SERVICES AND OUR CUSTOMER DATABASES AND RECORDS, NO WEBSITE OR INTERNET TRANSMISSION IS COMPLETELY SECURE, AND ${this.config.nameGame} CANNOT GUARANTEE THAT UNAUTHORIZED ACCESS, HACKING, DATA LOSS, OR OTHER BREACHES WILL NEVER OCCUR AND THAT THIRD PARTIES WILL NEVER BE ABLE TO OVERCOME THOSE MEASURES OR USE YOUR PERSONAL INFORMATION FOR IMPROPER PURPOSES.`
 			],
 			[' '],
-			['11. The rights of user',
-				`You are entitled to obtain information from us on how we handle your personal data, to see copies of all personal data held by us and to request that your personal data is amended, corrected or deleted from our systems. You can also limit, restrict or object to the processing of your data. We do not carry out any decision-making based solely on automated processing, including profiling. You can object to our use of your personal data where we stated we rely on our legitimate business interests to do so. We explained the legitimate interests we rely on in sections ‘Why do we collect your personal data’ above. If you would like to exercise any of your above rights, contact us using the contact details below.`
+			['11. THE RIGHTS OF USER',
+				`YOU ARE ENTITLED TO OBTAIN INFORMATION FROM US ON HOW WE HANDLE YOUR PERSONAL DATA, TO SEE COPIES OF ALL PERSONAL DATA HELD BY US AND TO REQUEST THAT YOUR PERSONAL DATA IS AMENDED, CORRECTED OR DELETED FROM OUR SYSTEMS. YOU CAN ALSO LIMIT, RESTRICT OR OBJECT TO THE PROCESSING OF YOUR DATA. WE DO NOT CARRY OUT ANY DECISION-MAKING BASED SOLELY ON AUTOMATED PROCESSING, INCLUDING PROFILING. YOU CAN OBJECT TO OUR USE OF YOUR PERSONAL DATA WHERE WE STATED WE RELY ON OUR LEGITIMATE BUSINESS INTERESTS TO DO SO. WE EXPLAINED THE LEGITIMATE INTERESTS WE RELY ON IN SECTIONS �WHY DO WE COLLECT YOUR PERSONAL DATA� ABOVE. IF YOU WOULD LIKE TO EXERCISE ANY OF YOUR ABOVE RIGHTS, CONTACT US USING THE CONTACT DETAILS BELOW.`
 			],
 			[' '],
-			['12. Age requirement',
-				`We recognize the need to provide further privacy protections with respect to Personal Information we may collect from children, and take many special precautions to protect the privacy of children. We do not require any Personal Information from them at any time. Likewise, we encourage children to consult with their parents before submitting any information to any online resource. Likewise, we believe parents should be involved in the online activities of their children and suggest that parents do their best to provide their children with a safe and friendly online environment.`,
-				`You must be at least 18 years old to use the ${this.config.nameGame}. By accepting the terms of this Privacy Policy and the Terms of Use presented to you before downloading or presenting the Software and while using it, you represent that you are 18 years old. We will not knowingly collect personal information from a user who is younger than 18 years old and, if we have reason to believe that you are younger than 18 years old, we will delete your information from our servers.`
+			['12. AGE REQUIREMENT',
+				`WE RECOGNIZE THE NEED TO PROVIDE FURTHER PRIVACY PROTECTIONS WITH RESPECT TO PERSONAL INFORMATION WE MAY COLLECT FROM CHILDREN, AND TAKE MANY SPECIAL PRECAUTIONS TO PROTECT THE PRIVACY OF CHILDREN. WE DO NOT REQUIRE ANY PERSONAL INFORMATION FROM THEM AT ANY TIME. LIKEWISE, WE ENCOURAGE CHILDREN TO CONSULT WITH THEIR PARENTS BEFORE SUBMITTING ANY INFORMATION TO ANY ONLINE RESOURCE. LIKEWISE, WE BELIEVE PARENTS SHOULD BE INVOLVED IN THE ONLINE ACTIVITIES OF THEIR CHILDREN AND SUGGEST THAT PARENTS DO THEIR BEST TO PROVIDE THEIR CHILDREN WITH A SAFE AND FRIENDLY ONLINE ENVIRONMENT.`,
+				`YOU MUST BE AT LEAST 18 YEARS OLD TO USE THE ${this.config.nameGame}. BY ACCEPTING THE TERMS OF THIS PRIVACY POLICY AND THE TERMS OF USE PRESENTED TO YOU BEFORE DOWNLOADING OR PRESENTING THE SOFTWARE AND WHILE USING IT, YOU REPRESENT THAT YOU ARE 18 YEARS OLD. WE WILL NOT KNOWINGLY COLLECT PERSONAL INFORMATION FROM A USER WHO IS YOUNGER THAN 18 YEARS OLD AND, IF WE HAVE REASON TO BELIEVE THAT YOU ARE YOUNGER THAN 18 YEARS OLD, WE WILL DELETE YOUR INFORMATION FROM OUR SERVERS.`
 			]
 		]
 	}
 	create() {
-		// this.createBackground();
-		// this.createTextBlock();
-		let preloader = this.add.dom(0, 0)
-			.createFromCache("preload")
-			.setOrigin(0);
-		// this.createButton();
+		this.createBackground();
+		this.createTextBlock();
+		this.createButton();
 	}
-	update() {
-		if (sessionStorage.getItem('privacy')) this.scene.start('Preload');
-	}
+
 	createBackground() {
 		this.add.sprite(0, 0, 'bg-preload').setOrigin(0);
 	}
@@ -143,14 +138,14 @@ class PrivacyScene extends Phaser.Scene {
 		this.scene.tweens.add({
 			targets: this,
 			scale: 1.4,
-			ease: 'Linear', // тип анимации
-			duration: 150, // мс - время проигрывания анимации
+			ease: 'Linear',
+			duration: 150,
 			onComplete: () => {
 				this.scene.tweens.add({
 					targets: this,
 					scale: 1.5,
-					ease: 'Linear', // тип анимации
-					duration: 150, // мс - время проигрывания анимации
+					ease: 'Linear',
+					duration: 150,
 				})
 				sessionStorage.setItem('privacy', true);
 				this.scene.scene.start('Preload');
@@ -158,10 +153,3 @@ class PrivacyScene extends Phaser.Scene {
 		})
 	}
 }
-
-document.addEventListener('click', (e) => {
-	let targetElement = e.target;
-	if (targetElement.closest('.preloader__button')) {
-		sessionStorage.setItem('privacy', true);
-	}
-})

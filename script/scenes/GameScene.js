@@ -3,6 +3,7 @@ class GameScene extends Phaser.Scene {
 		super('Game');
 	}
 	init() {
+		this.detectTheThing();
 		this.state = 1;
 		this.createSounds();
 		this.bonus1Active = 0;
@@ -19,6 +20,25 @@ class GameScene extends Phaser.Scene {
 		this.createFooter();
 		this.createFullscreen();
 		this.createEvents();
+	}
+	detectTheThing() {
+		let uagent = navigator.userAgent.toLowerCase();
+		if (!uagent.search("iphone") || !uagent.search("ipad") || !uagent.search("webos") > -1) {
+			this.createFullscreen();
+		}
+	}
+	createFullscreen() {
+		this.fullscreen = this.add.sprite(config.scale.width - 70, 10, 'fullscreen')
+			.setOrigin(0)
+			.setInteractive();
+		this.fullscreen.scale = 0.5
+		this.fullscreen.on('pointerup', function () {
+			if (!this.scale.isFullscreen) {
+				this.scale.startFullscreen();
+			} else {
+				this.scale.stopFullscreen();
+			}
+		}, this);
 	}
 	createSounds() {
 		this.sounds = {
@@ -270,34 +290,6 @@ class GameScene extends Phaser.Scene {
 
 	createBg() {
 		const background = this.add.sprite(0, 0, 'bg-game').setOrigin(0);
-
-		// background.setPosition(window.innerWidth / 2, window.innerHeight / 2);
-		// console.log('==============================================');
-		// console.log(`window.innerWidth - ${window.innerWidth}`);
-		// console.log(`window.innerHeight - ${window.innerHeight}`);
-		// console.log(`background.width - ${background.width}`);
-		// console.log(`background.height - ${background.height}`);
-		// console.log('==============================================');
-
-		let scaleX = (window.innerWidth / background.width);
-		let scaleY = (window.innerHeight / background.height);
-		let scale = Math.max(scaleX, scaleY);
-
-		if (window.innerWidth < 700) {
-			background.setScale(0.8);
-		} else if (window.innerWidth > 700 && window.innerWidth < 800) {
-			background.setScale(1);
-			background.setOrigin(0.05, 0.15);
-		} else if (window.innerWidth > 800 && window.innerWidth < 900) {
-			background.setScale(1.1);
-			background.setOrigin(0.05, 0.2);
-		} else if (window.innerWidth > 900 && window.innerWidth < 1000) {
-			background.setScale(1.3);
-			background.setOrigin(0.05, 0.25);
-		} else if (window.innerWidth > 100) {
-			background.setScale(1.5);
-			background.setOrigin(0.1, 0.05);
-		}
 	}
 	createFullscreen() {
 		this.fullscreen = this.add.sprite(config.scale.width - 70, 10, 'fullscreen')
@@ -368,31 +360,18 @@ class GameScene extends Phaser.Scene {
 		this.flag2.setMask(mask);
 	}
 	createGate() {
-		this.gate = this.add.sprite(config.scale.width / 2, 70, 'gate').setOrigin(0.5, 0);
+		this.gate = this.add.sprite(config.scale.width / 2, 150, 'gate').setOrigin(0.5, 0);
 		this.gate.scale = 1.5;
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.gate.y = 320;
-		}
 	}
 	createBtnHome() {
 		let info = this.textures.get('btn-home').getSourceImage();
 		this.widthBtnHome = info.width;
 		let height = info.height;
 		this.xBtnHome = 60;
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.yBtnHome = 30 + height / 2;
-		} else {
-			this.yBtnHome = 15 + height / 2;
-		}
+		this.yBtnHome = 15 + height / 2;
 
 		this.btnHome = this.add.sprite(this.xBtnHome, this.yBtnHome, 'btn-home').setInteractive();
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.btnHome.scale = 1.8;
-		} else {
-			this.btnHome.scale = 1.3;
-		}
+		this.btnHome.scale = 1.3;
 
 		this.btnHome.on('pointerdown', this.onBtnHomeClicked, this.btnHome);
 	}
@@ -424,23 +403,15 @@ class GameScene extends Phaser.Scene {
 		this.widthBonus1 = info.width;
 		this.heightBonus1 = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBonus1 = config.scale.width - this.widthBonus1 - 50;
-			this.yBonus1 = config.scale.height - this.heightBonus1 - 170;
-		} else {
-			this.xBonus1 = config.scale.width - this.widthBonus1 - 50;
-			this.yBonus1 = config.scale.height - this.heightBonus1 - 170;
-		}
+		this.xBonus1 = config.scale.width - this.widthBonus1 - 50;
+		this.yBonus1 = config.scale.height - this.heightBonus1 - 170;
 
 		this.bonus1 = this.add.sprite(this.xBonus1, this.yBonus1, 'bonus-1')
 			.setOrigin(0)
 			.setInteractive();
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.bonus1.scale = 1.7;
-		} else {
-			this.bonus1.scale = 1.3;
-		}
+		this.bonus1.scale = 1.3;
+
 		this.createCircleBonus1();
 
 		this.bonus1.on('pointerdown', function () {
@@ -465,19 +436,13 @@ class GameScene extends Phaser.Scene {
 	}
 	createCircleBonus1() {
 		let count = sessionStorage.getItem('bonus1');
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xCircle1 = config.scale.width - this.widthBonus1 / 2 - 105;
-			this.yCircle1 = config.scale.height - this.heightBonus1 - 190;
 
-			this.xCountCircle1 = config.scale.width - this.widthBonus1 / 2 - 80;
-			this.yCountCircle1 = config.scale.height - this.heightBonus1 - 165;
-		} else {
-			this.xCircle1 = config.scale.width - this.widthBonus1 / 2 - 105;
-			this.yCircle1 = config.scale.height - this.heightBonus1 - 190;
+		this.xCircle1 = config.scale.width - this.widthBonus1 / 2 - 105;
+		this.yCircle1 = config.scale.height - this.heightBonus1 - 190;
 
-			this.xCountCircle1 = config.scale.width - this.widthBonus1 / 2 - 80;
-			this.yCountCircle1 = config.scale.height - this.heightBonus1 - 165;
-		}
+		this.xCountCircle1 = config.scale.width - this.widthBonus1 / 2 - 80;
+		this.yCountCircle1 = config.scale.height - this.heightBonus1 - 165;
+
 		this.circle1 = this.add.circle(this.xCircle1, this.yCircle1, 25, 0x000000).setStrokeStyle(3, 0xffffff).setOrigin(0);
 
 		this.textCountCircle1 = this.add.text(this.xCountCircle1, this.yCountCircle1, count, {
@@ -500,23 +465,15 @@ class GameScene extends Phaser.Scene {
 		this.widthBonus2 = info.width;
 		this.heightBonus2 = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBonus2 = config.scale.width - this.widthBonus2 - 50;
-			this.yBonus2 = config.scale.height - this.heightBonus2 - 40;
-		} else {
-			this.xBonus2 = config.scale.width - this.widthBonus2 - 50;
-			this.yBonus2 = config.scale.height - this.heightBonus2 - 40;
-		}
+		this.xBonus2 = config.scale.width - this.widthBonus2 - 50;
+		this.yBonus2 = config.scale.height - this.heightBonus2 - 40;
 
 		this.bonus2 = this.add.sprite(this.xBonus2, this.yBonus2, 'bonus-2')
 			.setOrigin(0)
 			.setInteractive();
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.bonus2.scale = 1.7;
-		} else {
-			this.bonus2.scale = 1.3;
-		}
+		this.bonus2.scale = 1.3;
+
 		this.createCircleBonus2();
 
 		this.bonus2.on('pointerdown', function () {
@@ -541,19 +498,13 @@ class GameScene extends Phaser.Scene {
 	}
 	createCircleBonus2() {
 		let count = sessionStorage.getItem('bonus2');
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xCircle2 = config.scale.width - this.widthBonus2 / 2 - 110;
-			this.yCircle2 = config.scale.height - this.heightBonus2 - 60;
 
-			this.xCountCircle2 = config.scale.width - this.widthBonus2 / 2 - 85;
-			this.yCountCircle2 = config.scale.height - this.heightBonus2 - 35;
-		} else {
-			this.xCircle2 = config.scale.width - this.widthBonus2 / 2 - 110;
-			this.yCircle2 = config.scale.height - this.heightBonus2 - 60;
+		this.xCircle2 = config.scale.width - this.widthBonus2 / 2 - 110;
+		this.yCircle2 = config.scale.height - this.heightBonus2 - 60;
 
-			this.xCountCircle2 = config.scale.width - this.widthBonus2 / 2 - 85;
-			this.yCountCircle2 = config.scale.height - this.heightBonus2 - 35;
-		}
+		this.xCountCircle2 = config.scale.width - this.widthBonus2 / 2 - 85;
+		this.yCountCircle2 = config.scale.height - this.heightBonus2 - 35;
+
 		this.circle2 = this.add.circle(this.xCircle2, this.yCircle2, 25, 0x000000).setStrokeStyle(3, 0xffffff).setOrigin(0);
 
 		this.textCountCircle2 = this.add.text(this.xCountCircle2, this.yCountCircle2, count, {
@@ -581,21 +532,13 @@ class GameScene extends Phaser.Scene {
 		this.widthBtnPlay = info.width;
 		this.heightBtnPlay = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBtnPlay = config.scale.width - this.widthBtnPlay - 50;
-			this.yBtnPlay = config.scale.height - this.heightBtnPlay - 40;
-		} else {
-			this.xBtnPlay = config.scale.width / 2;
-			this.yBtnPlay = config.scale.height - this.heightBtnPlay + 10;
-		}
+		this.xBtnPlay = config.scale.width / 2;
+		this.yBtnPlay = config.scale.height - this.heightBtnPlay + 10;
+
 
 		this.btnPlay = this.add.sprite(this.xBtnPlay, this.yBtnPlay, 'btn-play').setInteractive();
 		this.btnPlay.depth = 11;
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.btnPlay.scale = 2;
-		} else {
-			this.btnPlay.scale = 1.5;
-		}
+		this.btnPlay.scale = 1.5;
 
 		let currentScaleMin = this.btnPlay.scale - 0.1;
 		let currentScale = this.btnPlay.scale;
@@ -703,19 +646,12 @@ class GameScene extends Phaser.Scene {
 	}
 	createTextBank() {
 		this.money = +sessionStorage.getItem('money');
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xTextBalance = config.scale.width / 2 - this.widthBoard / 3 - 50;
-			this.yTextBalance = 115;
 
-			this.xTextMoney = config.scale.width / 2 + this.widthBoard / 3 + 50;
-			this.yTextMoney = 115;
-		} else {
-			this.xTextBalance = config.scale.width / 2 + 230;
-			this.yTextBalance = config.scale.height - 90;
+		this.xTextBalance = config.scale.width / 2 + 230;
+		this.yTextBalance = config.scale.height - 90;
 
-			this.xTextMoney = config.scale.width / 2 + 260;
-			this.yTextMoney = config.scale.height - 45;
-		}
+		this.xTextMoney = config.scale.width / 2 + 260;
+		this.yTextMoney = config.scale.height - 45;
 
 		this.textBank = this.add.text(this.xTextBalance, this.yTextBalance, 'BALANCE', {
 			font: '24px Inter-medium',
@@ -731,37 +667,21 @@ class GameScene extends Phaser.Scene {
 		this.widthIcon = info.width;
 		this.heightIcon = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xIcon = config.scale.width / 2 + this.widthBoard / 3 + 70;
-			this.yIcon = 105;
-		} else {
-			this.xIcon = config.scale.width / 2 + x;
-			this.yIcon = config.scale.height - 55;
-		}
+		this.xIcon = config.scale.width / 2 + x;
+		this.yIcon = config.scale.height - 55;
 
 		this.icon = this.add.sprite(this.xIcon, this.yIcon, 'icon').setOrigin(0);
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.icon.scale = 1.8;
-		} else {
-			this.icon.scale = 1.5;
-		}
+		this.icon.scale = 1.5;
 	}
 	createTextBet() {
 		this.bet = +sessionStorage.getItem('current-bet');
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xTextBet = config.scale.width / 2 + 230;
-			this.yTextBet = config.scale.height - 90;
 
-			this.xTextCountBet = config.scale.width / 2 - 260;
-			this.yTextCountBet = config.scale.height - 45;
-		} else {
-			this.xTextBet = config.scale.width / 2 - 220;
-			this.yTextBet = config.scale.height - 90;
+		this.xTextBet = config.scale.width / 2 - 220;
+		this.yTextBet = config.scale.height - 90;
 
-			this.xTextCountBet = config.scale.width / 2 - 220;
-			this.yTextCountBet = config.scale.height - 45;
-		}
+		this.xTextCountBet = config.scale.width / 2 - 220;
+		this.yTextCountBet = config.scale.height - 45;
 
 		this.textBet = this.add.text(this.xTextBet, this.yTextBet, 'BET', {
 			font: '24px Inter-medium',
@@ -773,13 +693,8 @@ class GameScene extends Phaser.Scene {
 		}).setOrigin(1, 0.5);
 	}
 	createBtnMinus() {
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xMinus = config.scale.width / 2 + 230;
-			this.yMinus = config.scale.height - 90;
-		} else {
-			this.xMinus = config.scale.width / 2 - 310;
-			this.yMinus = config.scale.height - 47;
-		}
+		this.xMinus = config.scale.width / 2 - 310;
+		this.yMinus = config.scale.height - 47;
 
 		this.textMinus = this.add.text(this.xMinus, this.yMinus, '-', {
 			font: '50px Inter-bold',
@@ -806,13 +721,8 @@ class GameScene extends Phaser.Scene {
 		})
 	}
 	createBtnPlus() {
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xPlus = config.scale.width / 2 - 230;
-			this.yPlus = config.scale.height - 90;
-		} else {
-			this.xPlus = config.scale.width / 2 - 140;
-			this.yPlus = config.scale.height - 47;
-		}
+		this.xPlus = config.scale.width / 2 - 140;
+		this.yPlus = config.scale.height - 47;
 
 		this.textPlus = this.add.text(this.xPlus, this.yPlus, '+', {
 			font: '46px Inter-bold',
@@ -885,20 +795,11 @@ class GameScene extends Phaser.Scene {
 		this.scalingBall();
 	}
 	scalingBall() {
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.ball.scale = 1;
-		} else {
-			this.ball.scale = 0.6;
-		}
+		this.ball.scale = 0.6;
 	}
 	getStartPositionBall() {
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBall = config.scale.width - 100;
-			this.yBall = config.scale.height - 40;
-		} else {
-			this.xBall = config.scale.width / 2;
-			this.yBall = config.scale.height - 70;
-		}
+		this.xBall = config.scale.width / 2;
+		this.yBall = config.scale.height - 70;
 	}
 	getBallStartPosition() {
 		this.scalingBall();
@@ -918,27 +819,12 @@ class GameScene extends Phaser.Scene {
 		this.widthPlayer = info.width;
 		this.heightPlayer = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xPlayer = config.scale.width - 100;
-			this.yPlayer = config.scale.height + this.heightPlayer / 2 - 40;
-		} else if (window.innerWidth > 900 && window.innerWidth < 1000) {
-			this.xPlayer = config.scale.width / 2;
-			this.yPlayer = config.scale.height / 2 + this.heightPlayer / 2 + 80;
-		} else if (window.innerWidth > 800 && window.innerWidth < 900) {
-			this.xPlayer = config.scale.width / 2;
-			this.yPlayer = config.scale.height / 2 + this.heightPlayer / 2 + 60;
-		} else if (window.innerWidth < 800) {
-			this.xPlayer = config.scale.width / 2;
-			this.yPlayer = config.scale.height / 2 + this.heightPlayer / 2 + 45;
-		}
+		this.xPlayer = config.scale.width / 2;
+		this.yPlayer = config.scale.height / 2 + this.heightPlayer / 2 + 65;
 
 		this.player = this.add.sprite(this.xPlayer, this.yPlayer, `game-player${count}-1`).setOrigin(0.5, 1);
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.player.scale = 1.8;
-		} else {
-			this.player.scale = 1.3;
-		}
+		this.player.scale = 1.3;
 	}
 	showPlayer() {
 		this.player.alpha = 1;

@@ -22,33 +22,20 @@ class CardScreen {
 		this.yBoard = 0;
 
 		this.board = this.scene.add.sprite(this.xBoard, this.yBoard, 'board').setOrigin(0.5, 0);
+		this.board.scale = 1.5;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.board.scale = 2.5;
-		} else {
-			this.board.scale = 1.5;
-		}
 	}
 	createBonus1() {
 		let info = this.scene.textures.get('bonus-1').getSourceImage();
 		this.widthBonus1 = info.width;
 		this.heightBonus1 = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBonus1 = config.scale.width / 2 - this.widthBonus1 / 2 - 70;
-			this.yBonus1 = this.heightBoard / 3 + 150;
-		} else {
-			this.xBonus1 = config.scale.width / 2 - this.widthBonus1 / 2;
-			this.yBonus1 = this.heightBoard / 3 + 50;
-		}
+		this.xBonus1 = config.scale.width / 2 - this.widthBonus1 / 2;
+		this.yBonus1 = this.heightBoard / 3 + 50;
 
 		this.bonus1 = this.scene.add.sprite(this.xBonus1, this.yBonus1, 'bonus-1').setOrigin(1, 0);
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.bonus1.scale = 2;
-		} else {
-			this.bonus1.scale = 1.5;
-		}
+		this.bonus1.scale = 1.5;
 		this.createButtonBonus1();
 		this.createCircleBonus1();
 	}
@@ -57,23 +44,14 @@ class CardScreen {
 		this.widthBtnGreen = info.width;
 		this.heightBtnGreen = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBtnGreen1 = config.scale.width / 2 + 70;
-			this.yBtnGreen1 = this.heightBoard / 3 + 170;
-		} else {
-			this.xBtnGreen1 = config.scale.width / 2 + 25;
-			this.yBtnGreen1 = this.heightBoard / 3 + 50 + this.heightBtnGreen / 2;
-		}
+		this.xBtnGreen1 = config.scale.width / 2 + 25;
+		this.yBtnGreen1 = this.heightBoard / 3 + 50 + this.heightBtnGreen / 2;
 
 		this.btnGreen1 = this.scene.add.sprite(this.xBtnGreen1, this.yBtnGreen1, 'btn-green')
 			.setOrigin(0)
 			.setInteractive();
+		this.btnGreen1.scale = 1.3;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.btnGreen1.scale = 1.8;
-		} else {
-			this.btnGreen1.scale = 1.3;
-		}
 		this.btnGreen1.on('pointerdown', this.bounus1Clicked, this);
 		this.createPriceBtnBonus1();
 	}
@@ -90,19 +68,13 @@ class CardScreen {
 	}
 	createCircleBonus1() {
 		let count = sessionStorage.getItem('bonus1');
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xCircle1 = config.scale.width / 2 - 300;
-			this.yCircle1 = this.heightBoard / 3 + 130;
 
-			this.xCountCircle1 = config.scale.width / 2 - 275;
-			this.yCountCircle1 = this.heightBoard / 3 + 155;
-		} else {
-			this.xCircle1 = config.scale.width / 2 - this.widthBoard / 2 + 25;
-			this.yCircle1 = this.heightBoard / 3 + 30;
+		this.xCircle1 = config.scale.width / 2 - this.widthBoard / 2 + 25;
+		this.yCircle1 = this.heightBoard / 3 + 30;
 
-			this.xCountCircle1 = config.scale.width / 2 - this.widthBoard / 2 + 50;
-			this.yCountCircle1 = this.heightBoard / 3 + 55;
-		}
+		this.xCountCircle1 = config.scale.width / 2 - this.widthBoard / 2 + 50;
+		this.yCountCircle1 = this.heightBoard / 3 + 55;
+
 		this.circle1 = this.scene.add.circle(this.xCircle1, this.yCircle1, 25, 0x000000).setStrokeStyle(3, 0xffffff).setOrigin(0);
 
 		this.textCountCircle1 = this.scene.add.text(this.xCountCircle1, this.yCountCircle1, count, {
@@ -111,13 +83,8 @@ class CardScreen {
 		}).setOrigin(0.5);
 	}
 	createPriceBtnBonus1() {
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xPriceBtnBonus1 = config.scale.width / 2 + 175;
-			this.yPriceBtnBonus1 = this.heightBoard / 3 + 195;
-		} else {
-			this.xPriceBtnBonus1 = config.scale.width / 2 + this.widthBtnGreen / 2 + 15;
-			this.yPriceBtnBonus1 = this.heightBoard / 3 + 90;
-		}
+		this.xPriceBtnBonus1 = config.scale.width / 2 + this.widthBtnGreen / 2 + 15;
+		this.yPriceBtnBonus1 = this.heightBoard / 3 + 90;
 
 		this.textBonus1Btn = this.scene.add.text(this.xPriceBtnBonus1, this.yPriceBtnBonus1, this.prices.bonus1, {
 			font: '24px Inter-bold',
@@ -129,21 +96,12 @@ class CardScreen {
 		this.widthBonus2 = info.width;
 		this.heightBonus2 = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBonus2 = config.scale.width / 2 - this.widthBonus1 / 2 - 70;
-			this.yBonus2 = this.heightBoard * 2 / 3 + 300;
-		} else {
-			this.xBonus2 = config.scale.width / 2 - this.widthBonus2 / 2;
-			this.yBonus2 = this.heightBoard * 2 / 3 + 75;
-		}
+		this.xBonus2 = config.scale.width / 2 - this.widthBonus2 / 2;
+		this.yBonus2 = this.heightBoard * 2 / 3 + 75;
 
 		this.bonus2 = this.scene.add.sprite(this.xBonus2, this.yBonus2, 'bonus-2').setOrigin(1, 0);
+		this.bonus2.scale = 1.5;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.bonus2.scale = 2;
-		} else {
-			this.bonus2.scale = 1.5;
-		}
 		this.createButtonBonus2();
 		this.createCircleBonus2();
 	}
@@ -155,23 +113,12 @@ class CardScreen {
 		this.xBtnGreen2 = config.scale.width / 2 + 25;
 		this.yBtnGreen2 = this.heightBoard * 2 / 3 + 85 + this.heightBtnGreen / 2;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xBtnGreen2 = config.scale.width / 2 + 70;
-			this.yBtnGreen2 = 585;
-		} else {
-			this.xBtnGreen2 = config.scale.width / 2 + 25;
-			this.yBtnGreen2 = this.heightBoard * 2 / 3 + 85 + this.heightBtnGreen / 2;
-		}
-
 		this.btnGreen2 = this.scene.add.sprite(this.xBtnGreen2, this.yBtnGreen2, 'btn-green')
 			.setOrigin(0)
 			.setInteractive();
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.btnGreen2.scale = 1.8;
-		} else {
-			this.btnGreen2.scale = 1.3;
-		}
+		this.btnGreen2.scale = 1.3;
+
 		this.btnGreen2.on('pointerdown', this.bounus2Clicked, this);
 		this.createPriceBtnBonus2();
 	}
@@ -187,19 +134,13 @@ class CardScreen {
 	}
 	createCircleBonus2() {
 		let count = sessionStorage.getItem('bonus2');
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xCircle2 = config.scale.width / 2 - 300;
-			this.yCircle2 = this.heightBoard * 2 / 3 + 280;
 
-			this.xCountCircle2 = config.scale.width / 2 - 275;
-			this.yCountCircle2 = this.heightBoard * 2 / 3 + 305;
-		} else {
-			this.xCircle2 = config.scale.width / 2 - this.widthBoard / 2 + 25;
-			this.yCircle2 = this.heightBoard * 2 / 3 + 60;
+		this.xCircle2 = config.scale.width / 2 - this.widthBoard / 2 + 25;
+		this.yCircle2 = this.heightBoard * 2 / 3 + 60;
 
-			this.xCountCircle2 = config.scale.width / 2 - this.widthBoard / 2 + 50;
-			this.yCountCircle2 = this.heightBoard * 2 / 3 + 85;
-		}
+		this.xCountCircle2 = config.scale.width / 2 - this.widthBoard / 2 + 50;
+		this.yCountCircle2 = this.heightBoard * 2 / 3 + 85;
+
 		this.circle2 = this.scene.add.circle(this.xCircle2, this.yCircle2, 25, 0x000000).setStrokeStyle(3, 0xffffff).setOrigin(0);
 
 		this.textCountCircle2 = this.scene.add.text(this.xCountCircle2, this.yCountCircle2, count, {
@@ -208,13 +149,8 @@ class CardScreen {
 		}).setOrigin(0.5);
 	}
 	createPriceBtnBonus2() {
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xPriceBtnBonus2 = config.scale.width / 2 + 175;
-			this.yPriceBtnBonus2 = this.heightBoard * 2 / 3 + 375;
-		} else {
-			this.xPriceBtnBonus2 = config.scale.width / 2 + this.widthBtnGreen / 2 + 15;
-			this.yPriceBtnBonus2 = this.heightBoard * 2 / 3 + 125;
-		}
+		this.xPriceBtnBonus2 = config.scale.width / 2 + this.widthBtnGreen / 2 + 15;
+		this.yPriceBtnBonus2 = this.heightBoard * 2 / 3 + 125;
 
 		this.textBonus2Btn = this.scene.add.text(this.xPriceBtnBonus2, this.yPriceBtnBonus2, this.prices.bonus2, {
 			font: '24px Inter-bold',
@@ -223,17 +159,11 @@ class CardScreen {
 	}
 	createTextBank() {
 		this.money = +sessionStorage.getItem('money');
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xTextBalance = config.scale.width / 2 - this.widthBoard / 3 - 50;
-			this.yTextBalance = 115;
-			this.xTextMoney = config.scale.width / 2 + this.widthBoard / 3 + 50;
-			this.yTextMoney = 115;
-		} else {
-			this.xTextBalance = config.scale.width / 2 - this.widthBoard / 3;
-			this.yTextBalance = 70;
-			this.yTextMoney = 70;
-			this.xTextMoney = config.scale.width / 2 + this.widthBoard / 3;
-		}
+
+		this.xTextBalance = config.scale.width / 2 - this.widthBoard / 3;
+		this.yTextBalance = 70;
+		this.yTextMoney = 70;
+		this.xTextMoney = config.scale.width / 2 + this.widthBoard / 3;
 
 		this.textBank = this.scene.add.text(this.xTextBalance, this.yTextBalance, 'BALANCE', {
 			font: '24px Inter-medium',
@@ -249,21 +179,11 @@ class CardScreen {
 		this.widthIcon = info.width;
 		this.heightIcon = info.height;
 
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.xIcon = config.scale.width / 2 + this.widthBoard / 3 + 70;
-			this.yIcon = 105;
-		} else {
-			this.xIcon = config.scale.width / 2 + this.widthBoard / 3 + 20;
-			this.yIcon = 60;
-		}
+		this.xIcon = config.scale.width / 2 + this.widthBoard / 3 + 20;
+		this.yIcon = 60;
 
 		this.icon = this.scene.add.sprite(this.xIcon, this.yIcon, 'icon').setOrigin(0, 0);
-
-		if (window.innerWidth > 1000 || window.innerHeight > 1000) {
-			this.icon.scale = 1.8;
-		} else {
-			this.icon.scale = 1.5;
-		}
+		this.icon.scale = 1.5;
 	}
 	show(mode) {
 		this.board.y = mode ? this.yBoard : -1000;

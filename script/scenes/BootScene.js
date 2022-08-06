@@ -8,12 +8,6 @@ class BootScene extends Phaser.Scene {
 		this.load.html('preload', 'assets/test.html');
 	}
 	create() {
-		// if (!sessionStorage.getItem('privacy')) {
 		this.scene.start('Privacy');
-		// } else {
-		// 	this.scene.start('Preload');
-		// }
 	}
-
-
 }
