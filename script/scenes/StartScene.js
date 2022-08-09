@@ -44,14 +44,14 @@ class StartScene extends Phaser.Scene {
 		this.createFlags();
 		this.createPlayer2();
 
-		// Переделать - создать класс cardScreen для того чтобы задавать общую анимацию появления
 		this.createCardScreen();
 	}
 
 	detectTheThing() {
 		let uagent = navigator.userAgent.toLowerCase();
-		if (!uagent.search("iphone") || !uagent.search("ipad") || !uagent.search("webos") > -1) {
+		if (uagent.lastIndexOf("iphone") === -1 && uagent.lastIndexOf("ipad") === -1 && uagent.lastIndexOf("webos") === -1) {
 			this.createFullscreen();
+			this.createVolume();
 		}
 	}
 
@@ -62,18 +62,18 @@ class StartScene extends Phaser.Scene {
 		this.shirtScreen.show(false);
 	}
 	createSounds() {
+		this.sound.pauseOnBlur = false;
 		this.sounds = {
 			theme: this.sound.add('theme', { volume: 0.1, loop: true }),
 			touch: this.sound.add('touch'),
 		};
-		this.sounds.theme.play();
 	}
 
 	createBg() {
 		const background = this.add.sprite(0, 0, 'bg-preload').setOrigin(0);
 	}
 	createFullscreen() {
-		this.fullscreen = this.add.sprite(config.scale.width - 70, 10, 'fullscreen')
+		this.fullscreen = this.add.sprite(config.scale.width - 140, 10, 'fullscreen')
 			.setOrigin(0)
 			.setInteractive();
 		this.fullscreen.scale = 0.5
@@ -85,7 +85,46 @@ class StartScene extends Phaser.Scene {
 			}
 		}, this);
 	}
-
+	createVolume() {
+		this.volume = this.add.sprite(config.scale.width - 70, 10, 'volume')
+			.setOrigin(0)
+			.setInteractive();
+		this.volume.scale = 0.5;
+		this.volume.on('pointerdown', function () {
+			if (this.volumeState) {
+				this.volumeState = false;
+				this.sounds.theme.stop();
+				this.timer.remove();
+			} else {
+				this.volumeState = true;
+				this.sounds.theme.play();
+				this.volumeTick();
+				this.timer = this.time.addEvent({
+					delay: 2000,
+					callback: this.volumeTick,
+					callbackScope: this,
+					loop: true
+				})
+			}
+		}, this);
+	}
+	volumeTick() {
+		this.tweens.add({
+			targets: this.volume,
+			alpha: 0.5,
+			ease: 'Linear',
+			duration: 1000,
+			loop: true,
+			onComplete: () => {
+				this.tweens.add({
+					targets: this.volume,
+					alpha: 1,
+					ease: 'Linear',
+					duration: 1000
+				})
+			}
+		})
+	}
 	createMainButtons() {
 		let infoCard = this.textures.get('btn-card').getSourceImage();
 		let widthCard = infoCard.width;
@@ -225,7 +264,7 @@ class StartScene extends Phaser.Scene {
 		this.flagBox_1.y = -1000;
 		this.flagBox_2.y = 1000;
 
-		// Создаем флаги
+		// РЎРѕР·РґР°РµРј С„Р»Р°РіРё
 		for (let i = 0; i < 2; i++) {
 			for (let j = 1; j < 5; j++) {
 				if (i < 1) {
@@ -321,36 +360,36 @@ class StartScene extends Phaser.Scene {
 	onCardClicked() {
 		this.sounds.touch.play();
 		this.removeStartSprites();
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.ball,
 			x: config.scale.width - this.widthBall * 1.25,
 			y: config.scale.height - this.heightBall * 1.25,
 			ease: 'Linear',
-			duration: 150
+			duration: 300
 		})
 		this.addBtnHome();
 		this.removeBtnStart();
 		this.showPlayer2();
 		setTimeout(() => {
 			this.cardScreen.show(true);
-		}, 500);
+		}, 800);
 	}
 	onShirtClicked() {
 		this.sounds.touch.play();
 		this.removeStartSprites();
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.ball,
 			x: config.scale.width - this.widthBall * 1.25,
 			y: config.scale.height - this.heightBall * 1.25,
 			ease: 'Linear',
-			duration: 150
+			duration: 300
 		})
 		this.addBtnHome();
 		this.removeBtnStart();
 		this.showPlayer2();
 		setTimeout(() => {
 			this.shirtScreen.show(true);
-		}, 500);
+		}, 800);
 	}
 
 	onBtnHomeClicked() {
@@ -358,14 +397,14 @@ class StartScene extends Phaser.Scene {
 		this.scene.tweens.add({
 			targets: this,
 			scale: this.scale - 0.1,
-			ease: 'Linear', // тип анимации
-			duration: 150, // мс - время проигрывания анимации
+			ease: 'Linear',
+			duration: 150,
 			onComplete: () => {
 				this.scene.tweens.add({
 					targets: this,
 					scale: this.scale + 0.1,
-					ease: 'Linear', // тип анимации
-					duration: 150, // мс - время проигрывания анимации
+					ease: 'Linear',
+					duration: 150,
 				})
 				this.scene.backToMainMenu();
 			}
@@ -373,7 +412,7 @@ class StartScene extends Phaser.Scene {
 		setTimeout(() => {
 			this.scene.cardScreen.show(false);
 			this.scene.shirtScreen.show(false);
-		}, 150);
+		}, 600);
 	}
 
 	onBtnStartClicked() {
@@ -397,27 +436,26 @@ class StartScene extends Phaser.Scene {
 
 	backToMainMenu() {
 		this.counterBtnStart = 0;
-		// Убираем кнопку назад и флаги
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.btnHome,
 			x: this.xBtnHome,
 			ease: 'Linear',
-			duration: 150
+			duration: 300
 		})
 
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.flagBox_2,
 			y: 1000,
 			ease: 'Linear',
-			duration: 150,
-			delay: 150
+			duration: 300,
+			delay: 600
 		})
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.flagBox_1,
 			y: -1000,
 			ease: 'Linear',
-			duration: 150,
-			delay: 150
+			duration: 300,
+			delay: 600
 		})
 
 		this.flags.forEach(flag => {
@@ -425,40 +463,40 @@ class StartScene extends Phaser.Scene {
 				targets: flag,
 				scaleX: 0,
 				ease: 'Linear',
-				duration: 150
+				duration: 300
 			})
 		})
 		this.removeRect();
 		//=======
-		// добавляем стартовые спрайты
-		this.scene.scene.tweens.add({
+		// РґРѕР±Р°РІР»СЏРµРј СЃС‚Р°СЂС‚РѕРІС‹Рµ СЃРїСЂР°Р№С‚С‹
+		this.tweens.add({
 			targets: this.ball,
 			y: this.yBall,
 			x: this.xBall,
 			ease: 'Linear',
-			duration: 150,
-			delay: 300
+			duration: 300,
+			delay: 600
 		})
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.card,
 			y: this.yCard,
 			ease: 'Linear',
-			duration: 150,
-			delay: 300
+			duration: 300,
+			delay: 600
 		})
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.shirt,
 			y: this.yShirt,
 			ease: 'Linear',
-			duration: 150,
-			delay: 300
+			duration: 300,
+			delay: 600
 		})
-		this.scene.scene.tweens.add({
+		this.tweens.add({
 			targets: this.player,
 			y: this.yPlayer,
 			ease: 'Linear',
-			duration: 150,
-			delay: 300
+			duration: 300,
+			delay: 600
 		})
 		this.addBtnStart();
 		this.removePlayer2();
@@ -468,8 +506,8 @@ class StartScene extends Phaser.Scene {
 			targets: this.btnHome,
 			x: this.widthBtnHome + 15,
 			ease: 'Linear',
-			duration: 150,
-			delay: 300
+			duration: 300,
+			delay: 600
 		})
 	}
 	addBtnStart() {
@@ -477,24 +515,24 @@ class StartScene extends Phaser.Scene {
 			targets: this.btnStart,
 			x: this.xBtnStart,
 			ease: 'Linear',
-			duration: 150,
-			delay: 300
+			duration: 300,
+			delay: 600
 		})
 	}
 
 	startTeamScreen() {
-		// убираем лишние спрайты
+		// СѓР±РёСЂР°РµРј Р»РёС€РЅРёРµ СЃРїСЂР°Р№С‚С‹
 		if (this.counterBtnStart == 0) {
 			this.counterBtnStart = 1;
 			this.removeStartSprites();
-			this.scene.scene.tweens.add({
+			this.tweens.add({
 				targets: this.ball,
 				y: window.innerHeight + 500,
 				ease: 'Linear',
-				duration: 150
+				duration: 300
 			})
 			//====
-			// Добавляем кнопку назад и флаги
+			// Р”РѕР±Р°РІР»СЏРµРј РєРЅРѕРїРєСѓ РЅР°Р·Р°Рґ Рё С„Р»Р°РіРё
 			this.checkSelectedFlags();
 			this.addBtnHome();
 
@@ -502,15 +540,15 @@ class StartScene extends Phaser.Scene {
 				targets: this.flagBox_2,
 				y: 0,
 				ease: 'Linear',
-				duration: 150,
-				delay: 300,
+				duration: 300,
+				delay: 600,
 			})
 			this.scene.scene.tweens.add({
 				targets: this.flagBox_1,
 				y: 0,
 				ease: 'Linear',
-				duration: 150,
-				delay: 300
+				duration: 300,
+				delay: 600
 			})
 
 			this.flags.forEach(flag => {
@@ -518,8 +556,8 @@ class StartScene extends Phaser.Scene {
 					targets: flag,
 					scaleX: 1,
 					ease: 'Linear',
-					duration: 150,
-					delay: 600
+					duration: 300,
+					delay: 900
 				})
 			})
 		} else if (this.counterBtnStart == 1) {
@@ -528,31 +566,31 @@ class StartScene extends Phaser.Scene {
 		}
 	}
 	removeStartSprites() {
-		// убираем лишние спрайты
+		// СѓР±РёСЂР°РµРј Р»РёС€РЅРёРµ СЃРїСЂР°Р№С‚С‹
 		this.scene.scene.tweens.add({
 			targets: this.card,
-			y: -500,
+			y: -1000,
 			ease: 'Linear',
-			duration: 150
+			duration: 300
 		})
 		this.scene.scene.tweens.add({
 			targets: this.shirt,
-			y: window.innerHeight + 500,
+			y: window.innerHeight + 1000,
 			ease: 'Linear',
-			duration: 150
+			duration: 300
 		})
 		this.scene.scene.tweens.add({
 			targets: this.player,
 			rotation: -1.5,
 			y: window.innerHeight,
 			ease: 'Linear',
-			duration: 150,
+			duration: 300,
 			onComplete: () => {
 				this.scene.scene.tweens.add({
 					targets: this.player,
 					x: -this.player.height - 600,
 					ease: 'Linear',
-					duration: 150,
+					duration: 300,
 					onComplete: () => {
 						this.player.rotation = 0;
 						this.player.y = config.scale.height + 100;
@@ -576,8 +614,8 @@ class StartScene extends Phaser.Scene {
 			targets: this.player2,
 			x: this.xPlayer2Active,
 			ease: 'Linear',
-			duration: 150,
-			delay: 300
+			duration: 300,
+			delay: 600
 		})
 	}
 	removePlayer2() {
@@ -585,11 +623,11 @@ class StartScene extends Phaser.Scene {
 			targets: this.player2,
 			x: this.xPlayer2,
 			ease: 'Linear',
-			duration: 150
+			duration: 300
 		})
 	}
 
-	//Проверяем какие выбраны флаги, выделяем рамкой выбранные
+	//РџСЂРѕРІРµСЂСЏРµРј РєР°РєРёРµ РІС‹Р±СЂР°РЅС‹ С„Р»Р°РіРё, РІС‹РґРµР»СЏРµРј СЂР°РјРєРѕР№ РІС‹Р±СЂР°РЅРЅС‹Рµ
 	checkSelectedFlags() {
 		let flag1 = +sessionStorage.getItem('player-team');
 		let flag2 = +sessionStorage.getItem('enemy-team');
@@ -637,6 +675,6 @@ class StartScene extends Phaser.Scene {
 				this.r8 = this.add.rectangle(x2, y2, width2, height2).setOrigin(0);
 				this.r8.setStrokeStyle(3, 0x00D1FF);
 			}
-		}, 800);
+		}, 1300);
 	}
 }

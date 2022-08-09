@@ -3,14 +3,14 @@ class GameScene extends Phaser.Scene {
 		super('Game');
 	}
 	init() {
-		this.detectTheThing();
 		this.state = 1;
-		this.createSounds();
 		this.bonus1Active = 0;
 		this.bonus2Active = 0;
 	}
 	create() {
+		this.createSounds();
 		this.createBg();
+		this.detectTheThing();
 		this.createBoard();
 		this.createGate();
 		this.createBall();
@@ -18,17 +18,17 @@ class GameScene extends Phaser.Scene {
 		this.createBonuses();
 		this.createPlayer();
 		this.createFooter();
-		this.createFullscreen();
 		this.createEvents();
 	}
 	detectTheThing() {
 		let uagent = navigator.userAgent.toLowerCase();
-		if (!uagent.search("iphone") || !uagent.search("ipad") || !uagent.search("webos") > -1) {
+		if (uagent.lastIndexOf("iphone") === -1 && uagent.lastIndexOf("ipad") === -1 && uagent.lastIndexOf("webos") === -1) {
 			this.createFullscreen();
+			this.createVolume();
 		}
 	}
 	createFullscreen() {
-		this.fullscreen = this.add.sprite(config.scale.width - 70, 10, 'fullscreen')
+		this.fullscreen = this.add.sprite(config.scale.width - 140, 10, 'fullscreen')
 			.setOrigin(0)
 			.setInteractive();
 		this.fullscreen.scale = 0.5
@@ -48,7 +48,46 @@ class GameScene extends Phaser.Scene {
 			goal: this.sound.add('goal', { volume: 0.3 }),
 			loose: this.sound.add('loose', { volume: 0.3 })
 		};
-		this.sounds.theme.play();
+	}
+	createVolume() {
+		this.volume = this.add.sprite(config.scale.width - 70, 10, 'volume')
+			.setOrigin(0)
+			.setInteractive();
+		this.volume.scale = 0.5;
+		this.volume.on('pointerdown', function () {
+			if (this.volumeState) {
+				this.volumeState = false;
+				this.sounds.theme.stop();
+				this.timer.remove();
+			} else {
+				this.volumeState = true;
+				this.sounds.theme.play();
+				this.volumeTick();
+				this.timer = this.time.addEvent({
+					delay: 2000,
+					callback: this.volumeTick,
+					callbackScope: this,
+					loop: true
+				})
+			}
+		}, this);
+	}
+	volumeTick() {
+		this.tweens.add({
+			targets: this.volume,
+			alpha: 0.5,
+			ease: 'Linear',
+			duration: 1000,
+			loop: true,
+			onComplete: () => {
+				this.tweens.add({
+					targets: this.volume,
+					alpha: 1,
+					ease: 'Linear',
+					duration: 1000
+				})
+			}
+		})
 	}
 	createEvents() {
 		this.input.on('gameobjectdown', this.onSceneClicked, this);
@@ -294,19 +333,6 @@ class GameScene extends Phaser.Scene {
 
 	createBg() {
 		const background = this.add.sprite(0, 0, 'bg-game').setOrigin(0);
-	}
-	createFullscreen() {
-		this.fullscreen = this.add.sprite(config.scale.width - 70, 10, 'fullscreen')
-			.setOrigin(0)
-			.setInteractive();
-		this.fullscreen.scale = 0.5
-		this.fullscreen.on('pointerup', function () {
-			if (!this.scale.isFullscreen) {
-				this.scale.startFullscreen();
-			} else {
-				this.scale.stopFullscreen();
-			}
-		}, this);
 	}
 	createBoard() {
 		this.board = this.add.sprite(config.scale.width / 2, 10, 'game-board').setOrigin(0.5, 0);
@@ -884,7 +910,6 @@ class GameScene extends Phaser.Scene {
 			this.circleBall2.alpha = 0.5;
 			this.circleBall3.alpha = 0.5;
 		}
-
 	}
 	createAreasGloveBalls() {
 		this.configGloveBalls = {

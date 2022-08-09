@@ -8,6 +8,20 @@ class PreloadScene extends Phaser.Scene {
 		const loadingBar = new LoadingBar(this);
 	}
 	preloadAssets() {
+		this.load.audio('theme', 'assets/audio/theme.mp3');
+		this.load.audio('hit', [
+			'assets/audio/hit.wav',
+			'assets/audio/hit.m4a'
+		]);
+		this.load.audio('goal', [
+			'assets/audio/goal.mp3',
+			'assets/audio/goal.m4a'
+		]);
+		this.load.audio('touch', 'assets/audio/touch.wav');
+		this.load.audio('loose', [
+			'assets/audio/loose.mp3',
+			'assets/audio/loose.m4a'
+		]);
 		this.load.image('bg-game', 'assets/sprites/other/gameBg.jpg');
 		this.load.image('btn-start', 'assets/sprites/icons/btn-start.svg');
 		this.load.image('btn-card', 'assets/sprites/icons/btn-card.png');
@@ -40,6 +54,7 @@ class PreloadScene extends Phaser.Scene {
 		this.load.image('shirt-3', 'assets/sprites/icons/shirt-3.png');
 		this.load.image('btn-home', 'assets/sprites/icons/btn-home.png');
 		this.load.image('fullscreen', 'assets/sprites/icons/fullscreen.png');
+		this.load.image('volume', 'assets/sprites/icons/volume.png');
 
 		this.load.image('gate', 'assets/sprites/icons/gate.png');
 		this.load.image('game-board', 'assets/sprites/icons/game-board.png');
@@ -49,12 +64,6 @@ class PreloadScene extends Phaser.Scene {
 		this.load.image('flag-2', 'assets/sprites/flags/flag-bulgary.png');
 		this.load.image('flag-4', 'assets/sprites/flags/flag-swiss.png');
 		this.load.image('flag-1', 'assets/sprites/flags/flag-usa.png');
-
-		this.load.audio('theme', 'assets/audio/theme.mp3');
-		this.load.audio('hit', 'assets/audio/hit.wav');
-		this.load.audio('goal', 'assets/audio/goal.mp3');
-		this.load.audio('touch', 'assets/audio/touch.wav');
-		this.load.audio('loose', 'assets/audio/loose.mp3');
 	}
 	createBg() {
 		const background = this.add.sprite(0, 0, 'bg-preload').setOrigin(0);

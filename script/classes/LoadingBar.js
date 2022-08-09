@@ -12,32 +12,42 @@ class LoadingBar {
 
 		this.progressBox = this.scene.add.graphics();
 		this.progressBar = this.scene.add.graphics();
+		// this.loadFile = this.scene.add.text(config.scale.width / 2, config.scale.height / 2 - 100, 'file').setOrigin(0.5);
+		// this.loadFileStatus = this.scene.add.text(config.scale.width / 2, config.scale.height / 2 - 50, 'status').setOrigin(0.5);
+		// this.loadFileUrl = this.scene.add.text(config.scale.width / 2, config.scale.height / 2, 'url').setOrigin(0.5);
+
 
 		this.showProgressBox();
 
 		this.setEvents();
 	}
 	setEvents() {
-		this.scene.load.on('progress', this.showProgressBar, this); // событие, которое отслеживает прогресс выполнения загрузки. В функцию передает значение от 0 до 1
-		this.scene.load.on('complete', this.onLoadComplete, this); // событие, которое отслеживает завершение загрузки
+		this.scene.load.on('progress', this.showProgressBar, this); // СЃРѕР±С‹С‚РёРµ, РєРѕС‚РѕСЂРѕРµ РѕС‚СЃР»РµР¶РёРІР°РµС‚ РїСЂРѕРіСЂРµСЃСЃ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РіСЂСѓР·РєРё. Р’ С„СѓРЅРєС†РёСЋ РїРµСЂРµРґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РѕС‚ 0 РґРѕ 1
+		this.scene.load.on('fileprogress', this.onFileProgress, this);
+		this.scene.load.on('complete', this.onLoadComplete, this); // СЃРѕР±С‹С‚РёРµ, РєРѕС‚РѕСЂРѕРµ РѕС‚СЃР»РµР¶РёРІР°РµС‚ Р·Р°РІРµСЂС€РµРЅРёРµ Р·Р°РіСЂСѓР·РєРё
 	}
 
 	showProgressBox() {
-		// цепочка вызовов, то же самое что и прописывание в каждой строчке this.progressBox вместе со свойством
+		// С†РµРїРѕС‡РєР° РІС‹Р·РѕРІРѕРІ, С‚Рѕ Р¶Рµ СЃР°РјРѕРµ С‡С‚Рѕ Рё РїСЂРѕРїРёСЃС‹РІР°РЅРёРµ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕС‡РєРµ this.progressBox РІРјРµСЃС‚Рµ СЃРѕ СЃРІРѕР№СЃС‚РІРѕРј
 		this.progressBox
-			.fillStyle(this.style.boxColor) // устанавливаем цвет заливки блока
+			.fillStyle(this.style.boxColor) // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ Р·Р°Р»РёРІРєРё Р±Р»РѕРєР°
 			.fillRect(this.style.x, this.style.y, this.style.width, this.style.height);
+	}
+	onFileProgress(file) {
+		// this.loadFile.setText(file.key);
+		// this.loadFileStatus.setText(`status - ${file.xhrLoader.status}`);
+		// this.loadFileUrl.setText(file.xhrLoader.responseURL);
 	}
 
 	showProgressBar(value) {
 		this.progressBar
 			.clear()
-			.fillStyle(this.style.barColor) // устанавливаем цвет заливки блока
+			.fillStyle(this.style.barColor) // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ Р·Р°Р»РёРІРєРё Р±Р»РѕРєР°
 			.fillRect(this.style.x, this.style.y, this.style.width * value, this.style.height);
 	}
 
 	onLoadComplete() {
-		// метод, который вызывается когда загрузка завершена
+		// РјРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІС‹Р·С‹РІР°РµС‚СЃСЏ РєРѕРіРґР° Р·Р°РіСЂСѓР·РєР° Р·Р°РІРµСЂС€РµРЅР°
 		this.progressBar.destroy();
 		this.progressBox.destroy();
 	}
