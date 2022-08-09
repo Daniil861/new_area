@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0, user-scalable=0">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<title>Penalty Area</title>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background-color: #000;
+		}
+
+		@font-face {
+			font-family: 'Inter-bold';
+			src: url("assets/fonts/Inter-Bold.ttf");
+			font-weight: 700;
+		}
+
+		@font-face {
+			font-family: 'Inter-medium';
+			src: url("assets/fonts/Inter-Medium.ttf");
+			font-weight: 500;
+		}
+
+		.font-preload-m {
+			position: absolute;
+			top: -100px;
+			font-family: 'Inter-medium';
+		}
+
+		.font-preload-b {
+			position: absolute;
+			top: -100px;
+			font-family: 'Inter-bold';
+		}
+	</style>
+</head>
+
+<body>
+	<div id="thegame">
+		<div class="font-preload-m">.</div>
+		<div class="font-preload-b">.</div>
+	</div>
+
+	<script src="script/phaser.min.js"></script>
+
+	<script src="script/classes/LoadingBar.js"></script>
+	<script src="script/classes/CardScreen.js"></script>
+	<script src="script/classes/ShirtScreen.js"></script>
+	<script src="script/prefabs/Flag.js"></script>
+	<script src="script/scenes/BootScene.js"></script>
+	<script src="script/scenes/PrivacyScene.js"></script>
+	<script src="script/scenes/PreloadScene.js"></script>
+	<script src="script/scenes/StartScene.js"></script>
+	<script src="script/scenes/GameScene.js"></script>
+
+	<script src="script/index.js"></script>
+</body>
+
+</html>
